@@ -1,6 +1,7 @@
 project:
   type: website
-
+  output-dir: docs
+  
 website:
   title: "Quantification in History - HIST1505/HIST1515"
   navbar:
