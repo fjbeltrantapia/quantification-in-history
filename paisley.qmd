@@ -1,0 +1,217 @@
+---
+title: "Case-Study 1: The Paisley Prison dataset"
+execute:
+  eval: true
+  include: true
+  echo: true
+  warning: false
+  message: false
+---
+
+This case-study introduces basic tools to systematize and extract information from historical sources, regadless it is qualitative or numerical. Displaying frequency tables, plotting histograms and reporting summary statistics (i.e. the mean, the minimum and maximum values, the standard deviation, etc.) helps characterising how our data looks like. Making sense of the source using descriptive statistics can actually get you a long way in your understanding of the historical setting you are studying. 
+
+## Setting the stage 
+
+As explained in the Intro to R section, we need to include some preliminary commands in our script so we (1) get rid of other objects that could be in the R environment from previous sessions, (2) set the working directory, (3) load (and install if necessary) the packages we pla to use, and (4) import the dataset.
+
+```{r, engine="r", eval=FALSE}
+# Clear de "Global Environment"
+rm(list=ls()) 
+
+# Sets the working directory
+setwd("~/Documents/quants") 
+
+# Install/load packages
+install.packages("tidyverse")
+library(tidyverse)
+library(readxl)
+data <- read_excel("data/paisley-data.xlsx")
+```
+
+```{r}
+#| echo: false # not show because it is shown above but without "evaluating" due to setwd()
+
+rm(list=ls()) # Clear de "Global Environment"
+# Working directory set by the project itself
+
+library(tidyverse)
+library(readxl)
+data <- read_excel("data/paisley-data.xlsx")
+```
+## Inspecting the data
+
+Once the data is imported into the R environment as an object, we can start inspecting it as shown in the Intro to R section. As shown in the Global Environment, in the upper left corner, this this data frame (referred to as a tibble in the tidyverse terminology) contains 1,000 individuals (rows) and 21 fields (columns). Typing the name of the object (`data`) only provides information on the 10 first cases in order to save memory and space. Notice also that, below the variable name, R also indicates the type of variable: some are categorical ("chr" meaning character) and others are numerical ("dbl" meaning double).
+
+```{r}
+data
+```
+
+If you want to display more cases, you can use the function `print(n = 15)` and indicate the number of cases to be reported. Let's pause for a moment to disect what the code below is doing. Notice first that it is crucial to indicate where the information you are asking for is coming from. Remember that we imported the Paisley data into the *object* name `data`. The pipe (`|>`) here basically takes this object and uses it as input in the next line of code, which uses the function `print()` to request listing the first 15 cases from that object. Alternatively, you can have a look at the last 20 cases by typing `tail(20)`.
+
+```{r}
+data |>  
+  print(n = 15)
+```
+
+There are other commands that help knowing more about how the data set looks like such as `glimpse()` or `names()`. Feel free to try them out yourself. You can also have a sense of the magnitude and complexity of the whole data set by typing `view(data)`. The latter opens up a new tab where you can explore the full data set at ease. Notice also that some values are missing. R signals them as `NA` (not available), meaning that no information is recorded in those fields for those observations. We will discuss the importance of missing values in due time. 
+
+```{r}
+view(data)
+```
+
+What it is important to stress now is that, although the Paisley data set is not especially big, scrolling up-down and left-right makes it obvious that it is extremely difficult to extract any kind of pattern by just "looking" at all this information. Here is where statistics (and R) come to the rescue. 
+
+## Categorical (qualitative) variables
+
+We will start extracting information from the data set by focusing on categorical (qualitative) variables, those defined with words instead of numbers, such as sex, country of birth, occupation, etc. Each of these variables can exhibit certain values (categories) and it is important to stress that the difference between these values is merely qualitative (one category is no more or better than any other).
+
+The first step is to assess how the distribution of values (categories) looks like, that is, to quantify their relative importance. A **frequency table** reports the number of observations (usually referred to as `n`) falling into each category, an information that can easily be retrieved using `count()` and indicating which variable you want to get information on.
+
+```{r}
+data |>  
+  count(sex)
+```
+
+As you will have guessed, the code above takes the object *data* that contains the Paisley data set and implements the function `count()` on the field *sex*. The results shows that the data contains 284 female prisoners and 716 male prisoners (the categories are presented in alphabetical order: "female" and "male"). 
+
+We could do the same with any other variable. Notice that the function `count()` also reports the number of missing values (if any). Reporting a frequency table of the variable *employed* yields three different categories: employed, unemployed and NA. In this case, the data set did not record the emplyment status of 821 prisoners. Analysing variables with missing values presents especial challenges because their accuracy depends on the reasons behind its "missingness". 
+
+```{r}
+data |>  
+  count(employed)
+```
+
+As with other commands listing information, `count()` only reports the first 10 categories by default. Some variables, such as *occupation* (`occup`) has many categories, so you probably want to inspect all of them. You can just indicate explicitly how many categories you want to display by using the function `print()`: while indicating `n = 15` displays information on the first 15 categories, typing `n = Inf` reports all rows. Notice also that this command is now 3 lines long and we are using the pipe (`|>`) in each line to implement this sequence of instructions: the pipe takes the output from that line and uses it as an input in the following line.
+
+```{r}
+data |>  
+  count(occup) |>
+  print(n = 15)
+```
+
+As the previous example using occupations show, frequency tables are not that useful when the variable contains a large number of categories. Also, by default, `count()` reports the different categories in alphabetical order which is often not particularly useful. In such case, it is better to present the categories according to their relative importance in order to quickly identify the most important categories. This is achieved by introducing the option `sort` and set it up as `TRUE`. The results indicate that the most common occupation was "labourer", followed by "prostitute" and the rest. We also have 22 prisoners whose occupation was not recorded. You may wonder whether they did not want to report it or they did not have one. The same output can be achieved using the function `arrange(desc(n))`, which enables presenting the data in descending order based on the column `n`.
+
+```{r}
+data |>  
+  count(occup, sort = TRUE)
+```
+
+These simple descriptions of the data not only allow identifying what is typical, but also what is rare. In this regard, we can use `arrange()` to report those occupations that are less common among prisoners. Note that, by default, `arrange()` sorts the data in ascending order, so this command only needs the name of the field that serves to sort the data in ascending order (in the previous examples, we explicitly indicated that we wanted the data to be presented in descending order using the `desc()` argument). As seen below, it is also possible to extend the pipe (`|>`) and use `print()` to report more categories if needed.
+
+```{r}
+data |>  
+  count(occup) |> 
+  arrange(n) |> 
+  print(n=15) 
+```
+
+Likewise, apart from the absolute number of observations falling in each category, it is useful to report the **relative frequency**. Frequency tables in fact routinely report both values. As explained above, `count()` effectively transforms the paisley data set into something different by summarising the info contained in a particular field. If we want to report the relative frequency, we need to add another column computing it. Therefore, we need to create a new variable using the command `mutate()` and instruct R how to populate that new field. As you will soon find out, `mutate()` is an extremely important command. In the example below, it takes the table created by `count()` as input and creates a new variable named *prop* (or something else; you decide which name you give to the new field). The value of the new field is something that the researcher sets up. In this case, we want to compute the relative frequency of each occupational category, that is, the number of cases falling into each category divided by the total number of observations. While the first value is the result of the function `count()` as reported in the field `n`, the second value can be retrieved by using the appropriate function. The operation `n/sum(n)` will therefore achieve what you need.
+
+```{r}
+data |>  
+  count(occup, sort = TRUE) |>              
+  mutate(prop = n/sum(n)) 
+```
+
+Crucially, you can narrow your analysis by focusing on particular subsamples of the data (or excluding outliers). This is achieved using `filter()` which allows "filtering" the data set according to the conditions that you specify. Imagine, for instance, that you are interested in knowing the educational background of the female prisoners. By specifying that the variable *sex* should be equal to "female", `filter()` restricts the analysis to those observations (rows) fulfilling this condition. The results below show that, while many women in the Paisley data are either "illiterate" or "read a little", only 7 "read & write well". 
+
+```{r}
+data |> 
+  filter(sex=="female") |>   
+  count(literacy, sort = TRUE) |>              
+  mutate(prop = n/sum(n)) 
+```
+
+## Numerical variables
+
+Let's now explore variables that are expressed using numerical values. In the Paisley dataset, we only have three numerical variables: *age*, *height* and *weight*. Their specific properties advice to analyse them using a wider set of statistics. In this regard, simply reporting frequencies is often not very useful, especially when these variables include a large range of values. See, for instance, what happens when construct *frequency table* using now the variable *age*. The results report the number of observations falling in each category: 2 prisoners aged 9 years, 3 aged 10, etc. (we have also used `mutate()` to create an additional column with the relative frequency expressed as percentages). For questions of space, we just report the first 10 rows but the point is clear. You can display the full table, containing 62 rows, by adding the option `print(n=Inf)`. The full table obviously provides interesting insights but it is simply too large for being useful as an interpretative tool.
+
+```{r}
+data |>  
+  count(age) |>              
+  mutate(perc = 100*n/sum(n))
+```
+
+A useful way of exploring and reporting numerical variables is by using a **histogram**. This type of plot provides a visual representation of the distribution of values of the variable that we are analysing. The command `ggplot()` easily allows constructing histograms. You first need to indicate which variable you want to depict in the x-axis and then decide which type of plot you want. We have also included a line of code that establishes how the x-axis is labelled (in this case in multiples of 10 starting at age 0 and ending at age 90). As with any other function, we can also first use `filter()` to narrow down the analysis to particular subsamples of our data (i.e. gender, country of birth, etc.).
+
+```{r}
+#| warning: true
+data |>   
+  ggplot(aes(x = age)) +
+    geom_histogram(binwidth = 5) +
+    scale_x_continuous(breaks = seq(0, 90, 10))
+```
+
+Histograms present visual representations of the distribution of numerical variables. They are extremely useful because they provide an all-encompassing view of the data under analysis. However, it is also important to report specific values that help accurately describing the distribution. **Descriptive statistics** reduce complex distributions to more simple and intelligible numbers, thus making comparing distributions easier. The mean (or the average) is the most popular descriptive statistic but, depending on the researcher's aim, other statistics may prove even more important.
+
+The command `summarise()` allows computing all these **descriptive statistics**, also known as **summary statistics**. The following, for instance, compute the prisoners' average age. This computation will generate a variable (we have assigned it here the name *mean_age* but you can choose any other name) that is equal to the function we specify. In this case, we want to compute the average, so we use the function `mean()`. Notice that we are also including the parameter `na.rm = TRUE`, which stands for "NA remove", in order to exclude missing values from the computations and ensure accurate results (otherwise it results in NA because it cannot be computed; you can check the results removing that condition). As shown below, our prisoners are relatively young, on average.
+
+```{r}
+data |> 
+  summarize(mean_age = mean(age, na.rm = TRUE))
+```
+
+Calling different functions within `summarize()` allows calculating other statistics. In the example below, we also compute the number of observations with information of age and the minimun and maximum values. We are using the functions `sum()`, `mean()`, `min()` and `max()` to compute the corresponding statistics.^[It is important to notice the comma after each function since it allows for computing additional statistics (the last one thus does not need the comma). Note also that the brackets need to be balanced. Likewise, the function requesting the number of observations (`sum()`) is structured differently than the rest. This is because we need to count the number of prisoners reporting age (the option `!is.na` effectively ask to only consider those observations who are not reporting a missing value in the variable *age*). If we had used the code `sum(age), na.rm = TRUE` as in the other command lines, we would have obtained the sum of all the prisoners' ages (29,562 years; you can test it yourself).] This exercise tells us that the average age (*mean*) of the 999 prisoners reporting age (*obs*) is 29.6 years. It also indicates that there is at least a prisoner as young as 9 years old (*min*) and at least another one as old as 89 (*max*). 
+
+```{r}
+#| warning: false
+#| message: false
+data |> 
+  summarize(
+    obs = sum(!is.na(age)),
+    mean = mean(age, na.rm = TRUE), 
+    min = min(age, na.rm = TRUE),
+    max = max(age, na.rm = TRUE)) 
+```
+
+## Bivariate statistics
+
+Historians and other social scientists routinely base their narratives on comparisons across different dimensions (gender, age, socio-economic groups, regions, etc.). Let's then try to describe two variables simultaneously.
+
+Imagine, for instance, that we want to provide information on *age* and adult *weight*. Notice that weight is expressed in pounds. For those of us more used to deal with the metrical system, it is advisable to change the unit of measurement. This can be done by creating another variable (*weight_kg*) that makes the conversion (1 kgs. = 0.453592 pounds; the operator `<-` instruct R to modify the object `data` accordingly).
+
+```{r}
+data <- data |>
+  mutate(weight_kg = 0.453592*weight)
+```
+
+Coming back to our main purpose of simultaneously looking at *age* and *weight*, it would not make sense to report a table listing the average height for each age (i.e. 20, 21, 22, etc.), so we first use `mutate()` to create a variable grouping age into different **class intervals** (in 10-year cohorts starting at age 9) and then compute the average for each group using `group_by()` and `summarise()`. Given that we want to focus on adult weight, we are restricting the analysis to those age 20 or older. The results clearly show that older prisoners tend to have lower weights on average.^[There are only a few very really old prisoners, so their average weight is also very much influenced by chance.]
+
+```{r}
+data |> 
+  filter(age>=20) |>
+  mutate(age_class = cut(age, breaks = seq(19, 89, 10))) |>  
+  group_by(age_class) |>
+  summarise(obs = sum(!is.na(weight_kg)),
+            mean_weight = mean(weight_kg, na.rm = TRUE))
+```
+
+The same information could be depicted using a **line graph** by using `geom_line()` in `ggplot()` and indicating to plot the variables we just computed (*age* and *mean_weight*) in the x- and y-axes, respectively. Notice that instead of grouping ages into 10-year intervals, we are using the full distribution of ages (the trade-off is the higher variation arising from the low number of observations for each individual age). Contrary to long tables containing all the categories, plots allow presenting all the information in a more concise way. The graph below tracks the relationship between these two dimensions and clearly suggests that getting older is associated with losing weight (or, at least, that the older prisoners in our data set are lighter than the younger ones). 
+
+```{r}
+#| warning: false
+#| message: false
+data |> 
+  filter(age>=20) |>
+  group_by(age) |>
+  summarise(mean_weight = mean(weight_kg, na.rm = TRUE)) |>
+  ggplot(aes(x = age, y = mean_weight, group = 1)) +
+    geom_line()
+```
+
+We could obviously refine our analysis to take into account other dimensions of our data. Using `filter()`, for instance, would allow to focus on particular subsamples of our data (i.e. males or females) or exclude outliers, that is, observations with extreme values that may distort our results (i.e. very old prisoners; see chapter X for a more detailed discussion of **outliers**). We can also go beyond the previous graph and simultaneously consider other dimensions in the visualisation itself. The code below replicates the previous plot but distinguishing by sex and excluding the prisoner who are really old (80+). This exercise not only makes clear that women are in general lighter, but also that they seem to lose weight more rapidly than men: the slope of the line tracking the relationship between age and weight is steeper.
+
+```{r}
+#| warning: false
+#| message: false
+data |>
+  filter(age>=20 & age<80) |>
+  group_by(age, sex) |>
+  summarise(mean_weight = mean(weight_kg, na.rm = TRUE)) |>
+  ggplot(aes(x = age, y = mean_weight, color = sex)) +
+    geom_point() +
+    geom_line()
+```
+
+We don't have time for more. This is though just the very tip of the iceberg. Quantitative tools allow extracting information from historical sources in a powerful way, regardless whether the information is numerical or qualitative.
+

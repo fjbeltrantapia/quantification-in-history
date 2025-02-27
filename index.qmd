@@ -1,0 +1,35 @@
+## Session: Quantification in History
+
+March 10, 2025 -- 10:15-12:00 -- Auditorium D1
+
+[Francisco J. Beltrán Tapia](https://fjbeltrantapia.github.io)
+
+\vspace{1em}
+
+Welcome to quantitative methods in history! As part of the course **Introduction to historical theory and methods** (HIST1505/HIST1515), this session provides a practical introduction on how historians can use computational tools to learn about the past. 
+
+Below are the instructions to prepare the session in advance: 
+
+**1. Install R and RStudio**. **R** is a (free) statistical software and **RStudio** is an integrated interface that makes working with R easier. Bear in mind that you have to download and install both softwares: R and RStudio. The version you install depends on whether you are using Windows or Mac. Here is a [link](https://posit.co/download/rstudio-desktop/) to access them.
+
+**2. Create a dedicated folder to this session in your computer.** Name it `quants`. 
+
+**3. Download the following materials**. Store these files in separate folders (named `data` and `scripts`, respectively) within the folder `quants`:
+
+  * The [datasets]{.underline} we will be working with: [here](data/paisley-data.xlsx) and [here](data/state-of-the-union-texts.csv). 
+    
+  * The [R scripts]{.underline} containing the code to extract (some) information from them: [here](paisley.R) and [here](speeches.R).
+  
+**4. Get familiar with R and RStudio** by opening **RStudio** and following the instructions in the [Intro to R](get-r.html) section.  
+  
+**5. Read the following texts in advance:** 
+
+  - The background information for the two [case-studies]{.underline} we will be exploring: [The Paisley Prisoners' Dataset](backg-paisley.html) and [The State of the Union Presidential Speeches](backg-speeches.html).
+
+  - The text [Quantifying history]{.underline} (available in Blackboard).
+
+**6. Do not forget to bring your laptop to the session (or work in pairs)**
+
+\vspace{1em}
+
+Do not hesitate to contact me if you have any question!

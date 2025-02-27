@@ -1,0 +1,17 @@
+---
+title: "Readings"
+---
+
+The article **Quantifying history** (available in Blackboard) is compulsory reading. It outlines the advantages and disadvantages of using quantitative and computational methods in history. We will be discussing this text at the beginning of the session before moving on and explore how quantitative methods are implemented in practice using two historical case-studies: the [Paisley prison dataset]((backg-paisley.html)) and the [State of the Union Addresses]((backg-speeches.html)).  
+
+In case you are interested in knowing more about quantification in history, you can also check the articles available [here](https://drive.google.com/drive/folders/15nT89LSvrsuv6hYwMuBeKvzJHOnihvHm?usp=sharing). 
+
+- Graham et al. (2023), Historians Macroscope.
+
+- Fourie (2023), Quantitative History.
+
+- Lemercier and Zalc (2021), Back to the sources.
+
+- Blaxill (2023), Why do historians ignore digital analysis.
+
+- Jockers (2012), Macroanalysis.

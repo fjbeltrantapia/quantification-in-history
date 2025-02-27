@@ -1,0 +1,254 @@
+---
+title: "Case-Study 2: The State of the Union Presidential Speeches"
+execute:
+  eval: true
+  include: true
+  echo: true
+  warning: false
+  message: false
+---
+
+This second case-study explores how computational methods help extracting information from unstructured texts. We are only going to introduce very basic tools that basically count words. There are however more sophisticated tools, so take this just a first taste into this topic.
+
+## Preliminary steps
+
+As explained in the previous section, we need to include some preliminary commands in our script so we (1) get rid of other objects that could be in the R environment from previous sessions, (2) set the working directory, (3) load (and install if necessary) the packages we plan to use, and (4) import the dataset. Apart from the `tidyverse`, we will also make use of the `tidytext` package that contains many of the functions to treat textual corpuses. Importin the .csv file containing the corpus into R involves using the command `read_csv()` which is part of the `tidyverse`.
+
+```{r, engine="r", eval=FALSE}
+# Clear de "Global Environment"
+rm(list=ls()) 
+
+# Sets the working directory
+setwd("~/Documents/quants") 
+
+# Install/load packages
+install.packages("tidytext")
+library(tidyverse)
+library(tidytext)
+
+# Importing the data
+speeches <- read_csv("data/state-of-the-union-texts.csv")
+```
+
+```{r}
+#| echo: false # not show because it is shown above but without "evaluating" due to setwd()
+
+rm(list=ls()) # Clear de "Global Environment"
+# Working directory set by the project itself
+
+library(tidyverse)
+library(tidytext)
+
+# Importing the data
+speeches <- read_csv("data/state-of-the-union-texts.csv")
+```
+## Inspecting the data
+
+Let's start by having a first look at the data itself typing the name of the object we just created (`speeches`). As shown below, the contents of the tidyverse have been nicely structured into a data frame containing 4 columns (different pieces of information) and 235 rows (one for each speech).
+
+```{r}
+speeches
+```
+
+We can use the functions we are already familiar with to continue exploring the data. We can see for instance that two speeches were delivered in 1790 (there is only one speech each year from then on), something we will need to take into account later. 
+
+```{r}
+speeches |>
+  count(Year)
+```
+
+Looking at the column *President* (and sorting it out by those with higher counts) indicates that 
+
+```{r}
+speeches |> 
+  count(President, sort = TRUE)
+```
+
+It is also possible to have a look at the text of the speeches themselves. The code below for instance, takes the object `data` and prints the contents of fourth row of the field *Text*. 
+
+```{r}
+speeches$Text[4] 
+```
+
+But, how do we extract information from this type of unstructured data?
+
+## Word counts
+
+One possibility is to look at the number of times a particular term is mentioned in the corpus (or a set of terms). Let's for instance count how many times de words "woman" and "women" show up in the presidential speeches. The code below uses `mutate()` to create two new variables *woman* and *women* indicating how many times those terms appear in the column **Text**. The actual computation is performed by the function `str_count()` (from the `tidytext` package). R goes through the text in that column and search for the string of characters indicated there. Although this is a very simplistic way of searching for terms, it serves as an illustration. Given that we are interested in both terms simultaneously, we can aggregate this information by constructing another column (*sum_wom*) summing both columns. We modify the existing object using the operator `<-`.  
+
+```{r}
+speeches <- speeches |>
+  mutate(woman = str_count(Text, "woman"),
+         women = str_count(Text, "women"),
+         sum_wom = woman + women)
+```
+
+Typing the name of the object shows the results. We have basically added columns indicating how many times those terms show up in each speech.
+
+```{r}
+speeches
+```
+
+This kind of information is a numerical variable that can be treated the same way as the ones we explored in the previous case-study. Imagine, for instance that you want to compute the total number of times those terms are mentioned in the whole corpus (all the speeches) plus the mean value (how many times they show up for speech, on average). 
+
+```{r}
+speeches |>
+  summarize(sum = sum(sum_wom),
+            mean = mean(sum_wom, na.rm = TRUE))
+```
+
+Alternatively, we can explore the evolution of the use of these words over time, that is, how often they show up by year. The peculiar structure of this corpus makes this a bit more complicated than it actually is: we have one speech by year, except in 1790 when we have two. This means that for that year, we have two values in the column **sum_wom** (one for each speech). If we want to show the information for that year, we need to make a decision: either we sum those values, average them or something. Alternatively, to make things simpler, we can just drop that year from the analysis using `filter()`. While `ggplot()` defines which columns are shown in the x- and y-axes (**Year** and **sum_women**, respectively), `geom_line()` indicates that we want to plot a line graph.
+
+```{r}
+speeches %>%
+  filter(Year>1790) |>
+  ggplot(aes(x = Year, y = sum_wom)) +
+  geom_line()
+```
+
+The previous analysis is a bit naive (among other issues). What if some speeches are longer than others? Having "women" mentioned more often in some of them may therefore not reflect the attention given to women but just the fact that those speeches are longer and therefore have more room for talking about more things. One way of dealing with this issue is to relativise the previous value depending on how long the speech is. The code below uses again `mutate()` and `str_count()` to create a column counting how many words each speech has. `[\\w]+` is a *regular expression* (regex or regexp), that is, a sequence of characters that specifies a match pattern in text. Given that we don't have time to explain this, just trust me on this (useful tools for regular expressions can be found [here](https://regexr.com) or [here](https://regex101.com).
+
+```{r}
+speeches <- speeches |>
+  mutate(word_count = str_count(Text, "[\\w]+"))
+```
+
+We can graph the results so you have a sense of what this exercise is doing. As shows below, speeches were very short during the first years and became longer over time. 
+
+```{r}
+speeches |>
+  filter(Year>1790) |>
+  ggplot(aes(x = Year, y = word_count)) + 
+  geom_point() + 
+  geom_line()
+```
+
+Coming back to our original purpose, we are now in the position of relativising how many times the terms "woman" and "women" are mentioned depending on the length of the text. The code below does this operation (basically dividing the column *sum_women* between *word_count*) and plots the results.
+
+```{r}
+speeches %>% 
+  mutate(sum_rel = sum_wom/word_count) |>
+  filter(Year>1790) %>%
+  ggplot(aes(x = Year, y = sum_rel)) + 
+  geom_point() + 
+  geom_line() 
+```
+
+## Top frequencies
+
+Instead of searching for particular words (or set or words), we may want to adopt a more agnostic position and ask which words are most common in the speeches. This can be achieved by **tokenizing** the texts. This tool is actually used in many other applications, so it is important to see how it works.
+
+Basically, *tokenizing* splits the text into individual words (it also removes all of the punctuation and converts everything into lowercase characters). This is achieved with the function `unnest_tokens()` (which is part of the `tidytext` package). Apart from the object that contains the corpus we are exploring, this command requires two arguments: the column we want to tokenise (*Text*) and the name of the new column that will contain all the tokens (*words* in this case but it is up to you). 
+
+```{r}
+data_token <- speeches |> 
+  unnest_tokens(output = words, input = Text)
+```
+
+As evident below, this tool transform the original corpus into a new dataframe when each row refers to each token, while preserving the metadata associated to them (speech, president, year, etc.). In total, we have almost 1.8 million tokens in this corpus.
+
+```{r}
+data_token
+```
+
+Once the data is expressed in this way, the column *words* contain all tokens mentioned in the speeches. These categories are basically qualitative information and can therefore be treated with the same tools we learned in the previous session. For instance, we can simply `count()` the number of times each category (token) is mentioned. Sorting the results by those with the highest frequencies (`sort = TRUE`) immediately indicates which tokens are the most common.
+
+```{r}
+data_token |> 
+  count(words, sort = TRUE) %>% 
+  print(n = 20)
+```
+
+The problem with this approach is that the most common words have little meaning (at least in terms of illustrating which topics are mentioned). Luckily, there is a simple solution, namely to get rid of those words that are so common that we are not interested in them, known as **stop words**. In fact there is a list of *stop words* already built within the tidy environment. Calling this object helps clarifying what stop words actually are: articles, prepositions, etc. We are not covering it but not only are there different lists of stop words (and in many different languages), but you can also modify them (add/remove terms) or create your own list from scratch).
+
+```{r}
+stop_words |>   
+  print(n = 25)
+```
+
+The trick now is to take this list of stop words and use it to exclude those terms from the tokenised version of the presidential speeches. In order to do so, we take the corpus and use `anti_join()` to drop the terms that *match* with the list of stop words. Note that the argument `by` defines which fields contain the terms to be matched (*word* in the object `data_toke` and *words* in the object `stop_words`).
+
+```{r}
+data_token <- data_token |>
+  anti_join(stop_words, by = c("words" = "word"))
+data_token
+```
+
+The resulting object no longer contains those stop words. We can now proceed counting these categories again. The most common terms are now much more informative. 
+
+```{r}
+data_token |> 
+  count(words, sort = TRUE) |>  
+  print(n = 20)
+```
+
+We could easily graph this or even compare the most common words in different periods (or mentioned by different presidents, etc.). We are not going to enter in the details of the code below, but it basically depics which were the most common words before and after 1900.
+
+```{r}
+data_token |> 
+  mutate(period = ifelse(Year <= 1900, "19th c.", "20th c.")) |> 
+  group_by(period) |> 
+  count(words, sort=TRUE) |> 
+  mutate(proportion = n/sum(n)*1000) |> 
+  slice_max(order_by=proportion, n = 15) |> 
+  mutate(words = reorder(words, desc(proportion))) |> 
+  ggplot(aes(reorder_within(x = words, 
+                            by = proportion, within = period),
+             proportion, fill = period)) + 
+    geom_col() +
+    scale_x_reordered() +
+    scale_fill_manual(values = c("blue", "#56B4E9")) +
+    coord_flip() +
+    facet_wrap(~period, ncol = 2, scales = "free") +
+    xlab("Word")
+```
+
+## n-grams
+
+As mentioned above, *tokenising* goes beyond extracting what are the most commons words. It is also quite simple to count particular words as we did at the beginning of this session. The code below creates another column that assigns each observation the value 1 or 0 depending whether the token in the field *words* is "war" or not. It then computes the fraction of those tokens by year and plots the results.
+
+```{r}
+data_token |> 
+  mutate(war = ifelse(words == "war", 1, 0)) |>  
+  group_by(Year) |>
+  summarize(fr_war = mean(war, na.rm = TRUE)) |>
+  ggplot() +
+  geom_col(aes(x = Year, y = fr_war))
+```
+
+Likewise, instead of splitting the corpus into 1-gram tokens, tokenising may involve creating multiple-word tokens: 2-grams, 3-grams, etc. As above, the code below uses `unnest_tokens()` again but it now indicates that we want 2-gram tokens (`n = 2`). The output shows how the corpus has not been split into.
+
+```{r}
+data_token2 <- speeches |>
+  unnest_tokens(twogram, Text, token = "ngrams", n = 2)
+data_token2
+```
+
+This type of multiple-word tokens are very useful to identify the terms that are mentioned accompanying particular words. Imagine, for instance, that we are not only interested in how many times the word "women" is mentioned, but also in which context. The code below implements such analysis.
+
+```{r}
+women <- data_token2 |> 
+  separate_wider_delim(cols = twogram, delim = " ", 
+                       names = c("g1", "g2")) |>
+  filter(g1 == "women" | g2 == "women") |>
+  pivot_longer(g1:g2) |>
+  select(!name) |>
+  rename(words = value) |>
+  filter(words!="women") |>
+  anti_join(stop_words, by = c("words" = "word")) 
+women
+```
+
+```{r}
+women |> 
+  count(words, sort=TRUE)
+```
+
+```{r}
+women |> 
+  filter(words == "pregnant") |>
+  count(Year)
+```
+
+We are going to stop here. We don't have time for more but there is so much more. I hope this session has given you a sense of how computational methods allow extracting information from historical sources in a powerful way, regardless whether the information is qualitative, numerical or purely textual.
+

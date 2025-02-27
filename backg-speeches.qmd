@@ -1,0 +1,24 @@
+---
+title: "Case-study 2: The State of the Union Presidential Speeches"
+---
+
+The second case-study involves exploring the **State of the Union Addresses** that the president of the United States delivers annually since 1790. Each of these speeches seeks to set the political agenda. 
+
+As an illustration, please read the text included in the link below that records the address that Woodrow Wilson gave in December of 1913:
+
+[State of the Union Presidential Address - Woodrow Wilson - December 2, 1913](https://www.presidency.ucsb.edu/documents/first-annual-message-18) 
+
+![](images/wilson.jpg){width=100% height=100% fig-align="center"}
+
+The full corpus contains 235 texts (speeches; with a total of almost 1.7 million words) and constitutes an important source of information about the US political agenda and the wider socio-economic and cultural context surrounding them. This information has been gathered together into a .csv file that looks like @fig-csv below. Instead of columns, comma-separate (.csv) files separate the different pieces of information using commas as delimiters: name of the president delivering the speech (*President*), the year the speech was delivered (*Year*), the title of the speech (*Title*) and the (whole) text of the speech itself (*Text*).^[An extended dataset including party affiliation is available here: https://www.kaggle.com/datasets/rtatman/state-of-the-union-corpus-1989-2017] The first row displays the name of these variables and the remaining rows are devoted to each observation (speech) in the dataset.
+
+::: {#fig-csv}
+![](images/speeches-csv.png){width="100%" height="100%" fig-align="center"}
+Digital version of the State of the Union Addresses (.csv file).
+:::
+
+Computational text analysis can provide important insights about the contents of these speeches, including how they have changed over time or how they differ between Democrat and Republican presidents. What kind of words are used more often: "war" or "peace", "justice" or "freedom"? Is education an important topic in these speeches? What about the economy ("business", "debt", "dollar")? Which locations (including countries) are mentioned more often? Are women present in these speeches? What is the context in which these terms appear?
+
+In this case-study, we will explore very simple tools that allow counting the number of particular words appearing in those speeches. For those eager to learning more after our session, you can read more about applying computational methods to this corpus [here](https://www.theatlantic.com/politics/archive/2015/01/mapping-the-state-of-the-union/384576/),
+[here](https://ischoolonline.berkeley.edu/blog/trump-state-of-the-union-analysis/),
+[here](https://dl.acm.org/doi/pdf/10.1145/3603287.3651201), [here](https://www.rpubs.com/Przemyslaw_Mazurek/state_of_the_union) or [here](https://cran.r-project.org/web/packages/cleanNLP/vignettes/state-of-union.html). 

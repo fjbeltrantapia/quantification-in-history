@@ -1,0 +1,39 @@
+project:
+  type: website
+
+website:
+  title: "Quantification in History - HIST1505/HIST1515"
+  navbar:
+    type: inverse
+    left:
+    - text: "Overview"
+      icon: fa-home
+      href: index.qmd
+    - text: "Reading List"
+      icon: fa-list-ul
+      href: readings.qmd
+    - text: "Intro to R"
+      icon: fa-book
+      href: get-r.qmd      
+    - text: "Case-study 1"
+      icon: fa-book
+      menu: 
+      - text: "Background"
+        href: backg-paisley.qmd
+      #- text: "Script"
+       # href: paisley.qmd
+    - text: "Case-study 2"
+      icon: fa-book
+      menu: 
+      - text: "Background"
+        href: backg-speeches.qmd
+      #- text: "Script"
+       # href: speeches.qmd   
+
+bibliography: refs.bib
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
