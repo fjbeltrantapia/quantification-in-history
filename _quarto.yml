@@ -6,7 +6,7 @@ website:
   title: "Quantification in History - HIST1505/HIST1515"
   navbar:
     type: inverse
-    left:
+    right:
     - text: "Overview"
       icon: fa-home
       href: index.qmd
