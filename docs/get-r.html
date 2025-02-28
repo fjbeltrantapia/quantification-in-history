@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Intro to R – Quantification in History - HIST1505/HIST1515</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Quantification in History - HIST1505/HIST1515</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> <i class="bi bi-fa-home" role="img">
+</i> 
+<span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./readings.html"> <i class="bi bi-fa-list-ul" role="img">
+</i> 
+<span class="menu-text">Reading List</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./get-r.html" aria-current="page"> <i class="bi bi-fa-book" role="img">
+</i> 
+<span class="menu-text">Intro to R</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-case-study-1" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-fa-book" role="img">
+</i> 
+ <span class="menu-text">Case-study 1</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-case-study-1">    
+        <li>
+    <a class="dropdown-item" href="./backg-paisley.html">
+ <span class="dropdown-text">Background</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-case-study-2" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-fa-book" role="img">
+</i> 
+ <span class="menu-text">Case-study 2</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-case-study-2">    
+        <li>
+    <a class="dropdown-item" href="./backg-speeches.html">
+ <span class="dropdown-text">Background</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#r-interface" id="toc-r-interface" class="nav-link active" data-scroll-target="#r-interface">R interface</a></li>
+  <li><a href="#setting-up-the-stage" id="toc-setting-up-the-stage" class="nav-link" data-scroll-target="#setting-up-the-stage">Setting up the stage</a></li>
+  <li><a href="#importing-data-sets" id="toc-importing-data-sets" class="nav-link" data-scroll-target="#importing-data-sets">Importing data sets</a></li>
+  <li><a href="#further-references" id="toc-further-references" class="nav-link" data-scroll-target="#further-references">Further references</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Intro to R</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Implementing quantitative or computational analyses to historical (or any other) data requires some sort of statistical software. We will rely on <strong>R</strong>, a open-source free statistical software widely used by practitioners in many different fields both inside and outside academia. Although it is possible to work directly in R, using an integrated interface such as <strong>RStudio</strong> makes things much easier. RStudio basically integrates a text editor with the R console, so you can write, run and see the results of your analyses more easily.</p>
+<p>We will be therefore download and install both software (<strong>R</strong> and <strong>RStudio</strong>) in your computer. Here is a <a href="https://posit.co/download/rstudio-desktop/">link</a> to access them (the version you install depends on whether you are using Windows or Mac).</p>
+<section id="r-interface" class="level2">
+<h2 class="anchored" data-anchor-id="r-interface">R interface</h2>
+<p><a href="#fig-r-interface" class="quarto-xref">Figure&nbsp;1</a> below illustrates what <strong>RStudio</strong> looks like. As well as the different menus at the top, the interface is divided in four panels. We will use the upper-left panel to write the code that instructs R to perform the analyses. While it is also possible to directly type the commands in the console, using a <em>script</em> allows easily saving and replicating our work later on. While most of the results will show up in the <em>console</em> in the lower-left panel, the tab <em>plots</em> in the lower-right panel reproduces the visualisations we implement (by contrast, the tab <em>files</em> shows the structure of the directory where we are working on). Lastly, the <em>environmment</em>, located in the upper-left panel displays the objects that we load into the system.</p>
+<div id="fig-r-interface" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-r-interface-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="figure-content">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/r-interface.png" class="quarto-figure quarto-figure-center figure-img" style="width:100.0%;height:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-r-interface-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: RStudio Interface.
+</figcaption>
+</figure>
+</div>
+<p>As mentioned above, we will use a <em>script</em> to document our work. Using scripts makes it easy to keep a record of the commands you use, which in turn facilitates replicating (or adjusting) your analyse later, which will save you so much time (you can also re-use your old scripts or borrow parts to use in other projects).</p>
+</section>
+<section id="setting-up-the-stage" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-the-stage">Setting up the stage</h2>
+<p>Given that R needs some basic information regarding which folder in our computer (or the cloud) we are working from and which set of tools we are going to use, scripts usually start in a similar way. The code below includes some useful preparatory commands. You can copy and paste it in your own script.</p>
+<div class="cell" data-evaluation="false">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start afresh</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>()) <span class="co"># Clear de "Global Environment"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set working directory</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>() <span class="co"># Provides the current working directory</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"~/Documents/quants"</span>) </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sets the working directory to the appropriate folder</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Install packages</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that the symbol “#” allows creating “comments” (the characters turn green). R does not “read” these lines when implementing the code, so they can be used to both better structure our scripts and comment the code itself.</p>
+<p>A couple of further clarifications are though in order. Firstly, it is often difficult to type the correct directory path (the one above is the one in my computer). Setting it manually through the menu helps properly selecting the folder you want to be working from: `Session/Set working directory/Choose directory… Implementing this operation actually runs the necessary command in the <em>console</em>, so you can actually see the path to your folder or copy and paste it into the script (as it will be type in the script, you won’t need to do this again). I cannot emphasise enough how important is this step, since it indicates R where in our computer we will be working (so it is easy to access the necessary files). In this regard, it is important to have a folder structure (data, results, etc.) that facilitates navigating through your files.</p>
+<p>Secondly, the way that R works is by relying on tools that are contained in different packages. There are many of these packages and they not only need to be installed (only once), but also open before using (each session). This is why we need the commands <code>install.packages()</code> and <code>library()</code> to indicate which packages need to be installed and opened. The package <code>tidyverse</code>, in particular, gathers together different packages that are commonly used like <code>ggplot2</code>, <code>dplyr</code>, <code>readr</code>, etc. (it is therefore not necessary to install and load those packages individually). We will keep incorporating different packages as we need them.</p>
+<p>Your RStudio interface should look like something like <a href="#fig-r-prelim" class="quarto-xref">Figure&nbsp;2</a>, except for the fact that the command <code>setwd()</code> should include the path to your own working directory. We can now <em>run</em> these lines of code using the icon <code>Run</code>. Clicking it makes R go through the whole script in sequence. It first clears the environment, then sets the working directory and lastly installs and opens the package tidyverse. The results of these commands happen in the console panel, which gives some comments that we can safely ignore for now.</p>
+<div id="fig-r-prelim" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-r-prelim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="figure-content">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/r-prelim.png" class="quarto-figure quarto-figure-center figure-img" style="width:100.0%;height:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-r-prelim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Starting a R script.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="importing-data-sets" class="level2">
+<h2 class="anchored" data-anchor-id="importing-data-sets">Importing data sets</h2>
+<p>As well as the appropriate software (R and RStudio), this session uses two historical data sets to illustrate the concepts and methods covered here (you should have downloaded them). In order to start exploring this information, we first need to import the data into the R environment.</p>
+<p>As an illustration, let’s focus on one <em>Paisley dataset</em>, one of the historical sources we will be exploring here. The raw data is stored as an excel spreadsheet named “paisley-data.xlsx” in the folder “data”. The command <code>readxl()</code> imports this excel file into the R environment. Although <code>readxl</code> is contained in the tidyverse package, you still need to open it explicitly using <code>library()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/paisley-data.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that we are instructing R to find the file that is located in a particular folder. We are using a <em>relative path</em> that stems from where your project is saved in (if the data is in the same working directory, you don’t need the path, just the file name).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Notice also the symbol <code>&lt;-</code> (called <em>assignment operator</em>). It serves to create a (temporary) <em>object</em>, named <code>data</code> containing the Paisley data, which is now in the “environment” we are working with. The name of the object is up to you, we call it “data” but it could be anything else with certain restrictions (i.e.&nbsp;not starting with a number). One neat R feature is that you can load many <em>objects</em> simultaneously (with different pieces of information each) and treat them separately depending on your needs (we will see that we can “create” those objects ourselves as results of our analyses).</p>
+<p>Once an object has been created containing the data frame, it is listed in the upper-right window called environment. Typing the name of the object (<code>data</code> in this case) provides a peak at the underlying information. As shown below, the upper left corner indicates that this data frame (referred to as a tibble in the tidyverse terminology) contains 1,000 individuals (rows) and 21 fields (columns). By default, typing the name of the object (<code>data</code>) only provides information on the 10 first cases in order to save memory and space (imagine that your dataset contains 10 million observations!). The number of fields that are displayed depends on how much space is available in the <em>console</em> in the lower part of the interface. You are nonetheless informed about the number of rows and variables that are not visible (as well as the names of those variables). Notice also that, below the variable name, R also indicates the type of variable: some are categorical (“chr” meaning character) and others are numerical (“dbl” meaning double).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,000 × 21
+   casen    no month     year forename surname sex     age born  countryb reside
+   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; 
+ 1     1    17 january   1841 AGNES    M'INTY… fema…    24 pais… scotland colin…
+ 2     2    45 january   1841 CATHERI… CARLIN… fema…    30 irvi… scotland paisl…
+ 3     3    68 january   1841 JEAN     WRIGHT  fema…    17 pais… scotland paisl…
+ 4     4    91 february  1841 MARGRET  M'HAFF… fema…    18 glas… scotland paisl…
+ 5     5    93 february  1841 JANET    M'LEAN  fema…    25 cath… scotland strab…
+ 6     6   263 april     1841 ELIZA    DUNCAN  fema…    34 belf… ireland  paisl…
+ 7     7   280 april     1841 ANN      RYLEY   fema…    45 sligo ireland  glasg…
+ 8     8   299 april     1841 MARGRET  M'LEOD  fema…    40 gree… scotland green…
+ 9     9   300 april     1841 MARY     MILLAR… fema…    19 gree… scotland green…
+10    10   310 april     1841 JEAN     M'KINL… fema…    29 glas… scotland pollo…
+# ℹ 990 more rows
+# ℹ 10 more variables: feet &lt;dbl&gt;, inches &lt;dbl&gt;, weight &lt;dbl&gt;, occup &lt;chr&gt;,
+#   employed &lt;chr&gt;, literacy &lt;chr&gt;, marks &lt;chr&gt;, offence &lt;chr&gt;, sentence &lt;chr&gt;,
+#   source &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>If you want to display more cases, you can use the function <code>print(n = 15)</code> and indicate the number of cases to be reported. Let’s pause for a moment to disect what the code below is doing. Notice first that it is crucial to indicate where the information you are asking for is coming from. Remember that we imported the Paisley data into the <em>object</em> name <code>data</code>. The pipe (<code>|&gt;</code>) here basically takes this object and uses it as input in the next line of code, which uses the function <code>print()</code> to request listing the first 15 cases from that object. Alternatively, you can have a look at the last 20 cases by typing <code>tail(20)</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span>  </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,000 × 21
+   casen    no month     year forename surname sex     age born  countryb reside
+   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; 
+ 1     1    17 january   1841 AGNES    M'INTY… fema…    24 pais… scotland colin…
+ 2     2    45 january   1841 CATHERI… CARLIN… fema…    30 irvi… scotland paisl…
+ 3     3    68 january   1841 JEAN     WRIGHT  fema…    17 pais… scotland paisl…
+ 4     4    91 february  1841 MARGRET  M'HAFF… fema…    18 glas… scotland paisl…
+ 5     5    93 february  1841 JANET    M'LEAN  fema…    25 cath… scotland strab…
+ 6     6   263 april     1841 ELIZA    DUNCAN  fema…    34 belf… ireland  paisl…
+ 7     7   280 april     1841 ANN      RYLEY   fema…    45 sligo ireland  glasg…
+ 8     8   299 april     1841 MARGRET  M'LEOD  fema…    40 gree… scotland green…
+ 9     9   300 april     1841 MARY     MILLAR… fema…    19 gree… scotland green…
+10    10   310 april     1841 JEAN     M'KINL… fema…    29 glas… scotland pollo…
+11    11   343 may       1841 AGNES    CURRIE… fema…    35 islay scotland paisl…
+12    12   382 june      1841 ELLIZA   MUNN    fema…    18 john… scotland johns…
+13    13   425 june      1841 SARAH    BLACK … fema…    36 glas… scotland kelvi…
+14    57     3 january   1841 THOMAS   ROBERT… male     19 pais… scotland high …
+15    58    19 january   1841 JOHN     MONTGO… male     24 some… england  barra…
+# ℹ 985 more rows
+# ℹ 10 more variables: feet &lt;dbl&gt;, inches &lt;dbl&gt;, weight &lt;dbl&gt;, occup &lt;chr&gt;,
+#   employed &lt;chr&gt;, literacy &lt;chr&gt;, marks &lt;chr&gt;, offence &lt;chr&gt;, sentence &lt;chr&gt;,
+#   source &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>There are other commands that help knowing more about how the data set looks like such as <code>glimpse()</code> or <code>names()</code>. Feel free to try them out yourself. You can also have a sense of the magnitude and complexity of the whole data set by typing <code>view(data)</code>. The latter opens up a new tab where you can explore the full data set at ease. Notice also that some values are missing. R signals them as <code>NA</code> (not available), meaning that no information is recorded in those fields for those observations. We will discuss the importance of missing values in due time. What it is important to stress now is that, although the Paisley data set is not especially big, scrolling up-down and left-right makes it obvious that it is extremely difficult to extract any kind of pattern by just “looking” at all this information. Here is where statistics (and R) come to the rescue. This is basically what this book is about: learning how to use the rich information contained in our sources.</p>
+</section>
+<section id="further-references" class="level2">
+<h2 class="anchored" data-anchor-id="further-references">Further references</h2>
+<p>Alexander, Rohan (2023), Telling stories with Data. With applications in R (CRC Press).</p>
+<p>Ismay, Chester and Kim, Albert Y. (2024), Statistical inference via Data Science. A ModernDive into R and the Tidyverse (CRC Press).</p>
+<p>Silge, Julia, and Robinson, David (2017), Text mining with R. A tidy approach (O’Reilly). Wickham, Hadley, Çetinkaya-Rundel, Mine, and Grolemund, Garret (2023), R for Data Science (O’Reilly; 2nd edition).</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>This will work assuming the working directory is set to the appropriate folder (see previous step above). Although we strongly advice not to use menus, finding the appropriate path to your files is not always straightforward, so we make an exception here.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
