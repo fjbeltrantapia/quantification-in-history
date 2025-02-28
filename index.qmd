@@ -16,9 +16,9 @@ Below are the instructions to prepare the session in advance:
 
 **3. Download the following materials**. Store these files in separate folders (named `data` and `scripts`, respectively) within the folder `quants`:
 
-  * The [datasets]{.underline} we will be working with: [here](https://raw.githubusercontent.com/fjbeltrantapia/quantification-in-history/main/data/paisley-data.xlsx) and [here](https://raw.githubusercontent.com/fjbeltrantapia/quantification-in-history/main/data/state-of-the-union-texts.csv). 
+  * The [datasets]{.underline} we will be working with: [here](data/paisley-data.xlsx) and <a href="data/state-of-the-union-texts.csv" download>here</a>.
     
-  * The [R scripts]{.underline} containing the code to extract (some) information from them: [here](https://raw.githubusercontent.com/fjbeltrantapia/quantification-in-history/main/paisley.R) and [here](https://raw.githubusercontent.com/fjbeltrantapia/quantification-in-history/main/speeches.R).
+  * The [R scripts]{.underline} containing the code to extract (some) information from them: <a href="paisley.R" download>here</a> and <a href="speeches.R" download>here</a>.
   
 **4. Get familiar with R and RStudio** by opening **RStudio** and following the instructions in the [Intro to R](get-r.html) section.  
   
