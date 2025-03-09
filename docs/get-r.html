@@ -148,6 +148,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./backg-paisley.html">
  <span class="dropdown-text">Background</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./paisley.html">
+ <span class="dropdown-text">Script</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -160,6 +164,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="./backg-speeches.html">
  <span class="dropdown-text">Background</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./speeches.html">
+ <span class="dropdown-text">Script</span></a>
   </li>  
     </ul>
   </li>
@@ -187,7 +195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -210,11 +218,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Implementing quantitative or computational analyses to historical (or any other) data requires some sort of statistical software. We will rely on <strong>R</strong>, a open-source free statistical software widely used by practitioners in many different fields both inside and outside academia. Although it is possible to work directly in R, using an integrated interface such as <strong>RStudio</strong> makes things much easier. RStudio basically integrates a text editor with the R console, so you can write, run and see the results of your analyses more easily.</p>
 <p>We will be therefore download and install both software (<strong>R</strong> and <strong>RStudio</strong>) in your computer. Here is a <a href="https://posit.co/download/rstudio-desktop/">link</a> to access them (the version you install depends on whether you are using Windows or Mac).</p>
-<section id="r-interface" class="level2">
+<section id="r-interface" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="r-interface">R interface</h2>
 <p><a href="#fig-r-interface" class="quarto-xref">Figure&nbsp;1</a> below illustrates what <strong>RStudio</strong> looks like. As well as the different menus at the top, the interface is divided in four panels. We will use the upper-left panel to write the code that instructs R to perform the analyses. You therefore need to open a new <code>R Script</code> (from the menu or clicking the icon). While it is also possible to directly type the commands in the console, using a <strong>script</strong> allows easily saving and replicating our work later on. While most of the results will show up in the <strong>console</strong> in the lower-left panel, the tab <strong>plots</strong> in the lower-right panel reproduces the visualisations we implement (by contrast, the tab <strong>files</strong> shows the structure of the directory where we are working on). Lastly, the <strong>environmment</strong>, located in the upper-left panel displays the objects that we load into the system.</p>
-<div id="fig-r-interface" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
+<div id="fig-r-interface" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-r-interface-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="figure-content">
 <div class="quarto-figure quarto-figure-center">
@@ -224,14 +232,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-r-interface-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-r-interface-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: RStudio Interface.
 </figcaption>
 </figure>
 </div>
 <p>As mentioned above, we will use a <em>script</em> to document our work. Using scripts makes it easy to keep a record of the commands you use, which in turn facilitates replicating (or adjusting) your analyse later, which will save you so much time (you can also re-use your old scripts or borrow parts to use in other projects).</p>
 </section>
-<section id="setting-up-the-stage" class="level2">
+<section id="setting-up-the-stage" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="setting-up-the-stage">Setting up the stage</h2>
 <p>Given that R needs some basic information regarding which folder in our computer (or the cloud) we are working from and which set of tools we are going to use, scripts usually start in a similar way. The code below includes some useful preparatory commands. You can copy and paste it in your own script.</p>
 <div class="cell" data-evaluation="false">
@@ -253,8 +261,8 @@ Figure&nbsp;1: RStudio Interface.
 <p>A couple of further clarifications are though in order. Firstly, it is often difficult to type the correct directory path (the one above is the one in my computer). Setting it manually through the menu helps properly selecting the folder you want to be working from: <code>Session/Set working directory/Choose directory...</code> Implementing this operation actually runs the necessary command in the <em>console</em>, so you can actually see the path to your folder or copy and paste it into the script (as it will be type in the script, you won’t need to do this again). I cannot emphasise enough how important this step is, since it indicates R where in our computer we will be working (so it is easy to access the necessary files). In this regard, it is important to have a folder structure (data, results, etc.) that facilitates navigating through your files.</p>
 <p>Secondly, the way that R works is by relying on tools that are contained in different packages. There are many of these packages and they not only need to be installed (only once), but also open before using (each session). This is why we need the commands <code>install.packages()</code> and <code>library()</code> to indicate which packages need to be installed and opened. The package <code>tidyverse</code>, in particular, gathers together different packages that are commonly used like <code>ggplot2</code>, <code>dplyr</code>, <code>readr</code>, etc. (it is therefore not necessary to install and load those packages individually). We will keep incorporating different packages as we need them.</p>
 <p>Your RStudio interface should look like something like <a href="#fig-r-prelim" class="quarto-xref">Figure&nbsp;2</a>, except for the fact that the command <code>setwd()</code> should include the path to your own working directory. We can now <em>run</em> these lines of code selecting them and using the icon <code>Run</code>. Clicking it makes R go through those command lines in sequence (or through the whole script if you indicate so). It first clears the environment, then sets the working directory and lastly installs and opens the package tidyverse. The results of these commands happen in the console panel, which gives some comments that we can safely ignore for now.</p>
-<div id="fig-r-prelim" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
+<div id="fig-r-prelim" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-r-prelim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="figure-content">
 <div class="quarto-figure quarto-figure-center">
@@ -264,7 +272,7 @@ Figure&nbsp;1: RStudio Interface.
 </div>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-r-prelim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-r-prelim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: Starting a R script.
 </figcaption>
 </figure>

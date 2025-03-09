@@ -21,15 +21,15 @@ website:
       menu: 
       - text: "Background"
         href: backg-paisley.qmd
-      #- text: "Script"
-       # href: paisley.qmd
+      - text: "Script"
+        href: paisley.qmd
     - text: "Case-study 2"
       icon: fa-book
       menu: 
       - text: "Background"
         href: backg-speeches.qmd
-      #- text: "Script"
-       # href: speeches.qmd   
+      - text: "Script"
+        href: speeches.qmd   
 
 bibliography: refs.bib
 
@@ -38,3 +38,5 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
+    fig-cap-location: margin
+    linkcolor: $blue

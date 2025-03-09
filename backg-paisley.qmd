@@ -6,9 +6,11 @@ The fist case-study deals with the admission records from the Paisley prison, an
 
 For an illustration on how this type of source looks like, see the register included below of John Hearn, a 12-year old convicted in 1873 for stealing 11 pieces of leather who was sentenced to one month of hard labour. Interestingly, prison records provide info on both males and females, a feature that is relatively uncommon for this period (when most of the height data come from military conscripts).
 
-![](images/john-hearn.png){fig-alt="Prison record." width=50% height=50% fig-align="center"}
+::: {#fig-source}
+![Admission register, H.M. Prison Wandsworth (June 14, 1873).](images/john-hearn.png){width=50% height=50% fig-align="center"}
+:::
 
-The previous picture comes from the [H.M. Prison Wandsworth](https://discovery.nationalarchives.gov.uk/details/r/d0cbdc1e-f297-4488-9acf-1da291f28f76), near London. The Paisley records are not as fancy. @fig-source below shows a sample of the original source. While each column records different pieces of information (case number, date of admission, name, etc.), each row refers to each inmate in the data set. The data set was originally collected by Hamish Maxwell-Stewart, James Bradley and Tamsin O'Connor who systematically sample every fourth double page of all registers, resulting in a total of 13,879 observations. For practical reasons, we will rely on a subset of the full data set, containing a thousand prisoners. This source presents information in a very structured form, that can be easily transferred to a digital version.
+The previous picture comes from the [H.M. Prison Wandsworth](https://discovery.nationalarchives.gov.uk/details/r/d0cbdc1e-f297-4488-9acf-1da291f28f76), near London. The Paisley records are not as fancy. @fig-source below shows a sample of the original source. While each column records different pieces of information (case number, date of admission, name, etc.), each row refers to each inmate in the data set. The data set was originally collected by Hamish Maxwell-Stewart, James Bradley and Tamsin O'Connor who systematically sample every fourth double page of all registers, resulting in a total of 13,879 observations. For practical reasons, we will rely on a subset of the full data set, containing a thousand prisoners.^[I am extremely thankful to Deborah Oxley and Hamish Maxwell-Stewart for kindly sharing this material. I am especially indebted to Deb whose course materials I inherited when I first started teaching a similar course at the University of Oxford in 2011.] This source presents information in a very structured form, that can be easily transferred to a digital version.
 
 ::: {#fig-source layout-ncol="2"}
 ![](images/paisley1.png){width="50%" height="50%"}
@@ -26,8 +28,8 @@ As well as the case number, the source reports name, sex, age, place (and countr
 
 Inputing the raw data into an Excel spreadsheet results in @fig-excel below. Each column, known as **field** or **variable** presents a piece of information. As well as the case number (*casen*) and the date of admission (information that is split in two fields: *month* and *year*), the source records several pieces of information about these inmates, such *name* and *surname*, *sex*, *age*, place of birth (*born*) and country of birth (*countryb*), the place where the were living before being imprisoned (*reside*), height (in *feet* and *inches*) and *weight*, occupation (*occup*) and whether they were *employed* or not. It also reports their *literacy*, the *marks* that were visible in their bodies, the *offence* they committed and the *sentence* they received. While the first row displays the name of these variables, the remaining rows are devoted to each individual in the dataset.
 
-::: {#fig-excel}
-![](images/paisley-excel.png){width="100%" height="100%" fig-align="center"}
+::: {#fig-excel layout-ncol="1"}
+![](images/paisley-excel.png){width="100%" height="100%"}
 Digital version of the Paisley data (Excel file).
 :::
 

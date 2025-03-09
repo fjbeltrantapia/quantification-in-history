@@ -134,6 +134,10 @@ div.csl-indent {
     <a class="dropdown-item" href="./backg-paisley.html">
  <span class="dropdown-text">Background</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./paisley.html">
+ <span class="dropdown-text">Script</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -146,6 +150,10 @@ div.csl-indent {
         <li>
     <a class="dropdown-item" href="./backg-speeches.html">
  <span class="dropdown-text">Background</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./speeches.html">
+ <span class="dropdown-text">Script</span></a>
   </li>  
     </ul>
   </li>
@@ -170,7 +178,7 @@ div.csl-indent {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -193,14 +201,24 @@ div.csl-indent {
 
 <p>The fist case-study deals with the admission records from the Paisley prison, an institution located in a village near Glasgow (The Scottish National Archives). Kept in the National Archives of Scotland, these registers provide individual information on those prisoners who were admitted into this institution between 1841 and 1883.</p>
 <p>For an illustration on how this type of source looks like, see the register included below of John Hearn, a 12-year old convicted in 1873 for stealing 11 pieces of leather who was sentenced to one month of hard labour. Interestingly, prison records provide info on both males and females, a feature that is relatively uncommon for this period (when most of the height data come from military conscripts).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/john-hearn.png" class="quarto-figure quarto-figure-center figure-img" style="width:50.0%;height:50.0%" alt="Prison record."></p>
+<div id="fig-source" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-source-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/john-hearn.png" class="figure-img" style="width:50.0%;height:50.0%"></p>
+<figcaption class="margin-caption">Admission register, H.M. Prison Wandsworth (June 14, 1873).</figcaption>
 </figure>
 </div>
-<p>The previous picture comes from the <a href="https://discovery.nationalarchives.gov.uk/details/r/d0cbdc1e-f297-4488-9acf-1da291f28f76">H.M. Prison Wandsworth</a>, near London. The Paisley records are not as fancy. <a href="#fig-source" class="quarto-xref">Figure&nbsp;1</a> below shows a sample of the original source. While each column records different pieces of information (case number, date of admission, name, etc.), each row refers to each inmate in the data set. The data set was originally collected by Hamish Maxwell-Stewart, James Bradley and Tamsin O’Connor who systematically sample every fourth double page of all registers, resulting in a total of 13,879 observations. For practical reasons, we will rely on a subset of the full data set, containing a thousand prisoners. This source presents information in a very structured form, that can be easily transferred to a digital version.</p>
-<div id="fig-source" class="quarto-layout-panel">
-<figure class="quarto-float quarto-float-fig figure">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-source-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+<p>The previous picture comes from the <a href="https://discovery.nationalarchives.gov.uk/details/r/d0cbdc1e-f297-4488-9acf-1da291f28f76">H.M. Prison Wandsworth</a>, near London. The Paisley records are not as fancy. <a href="#fig-source" class="quarto-xref">Figure&nbsp;2</a> below shows a sample of the original source. While each column records different pieces of information (case number, date of admission, name, etc.), each row refers to each inmate in the data set. The data set was originally collected by Hamish Maxwell-Stewart, James Bradley and Tamsin O’Connor who systematically sample every fourth double page of all registers, resulting in a total of 13,879 observations. For practical reasons, we will rely on a subset of the full data set, containing a thousand prisoners.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> This source presents information in a very structured form, that can be easily transferred to a digital version.</p>
+<div id="fig-source" class="quarto-layout-panel page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-source-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -219,24 +237,28 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-source-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Admission Register, Paisley Prison, National Archives of Scotland, Paisley 1841-1883 HH21/32/1, HH21/39/1-9.
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-source-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Admission Register, Paisley Prison, National Archives of Scotland, Paisley 1841-1883 HH21/32/1, HH21/39/1-9.
 </figcaption>
 </figure>
 </div>
 <p>As well as the case number, the source reports name, sex, age, place (and country) of birth, place of residence, height, weight, occupation and literacy level, etc. As well demographic and socio-economic information, the registers also include the offence committed and the sentence they were punished with (see image below). The education, occupations, and types of crimes (mostly petty crimes) suggest that these prisoners were drawn from the low working classes, which constituted a large proportion of the full population at the time. Comparing the prisoners’ registers with those of the 1861 population census also confirms that they were “ordinary if vulnerable workers” <span class="citation" data-cites="meredith2015">(<a href="#ref-meredith2015" role="doc-biblioref">Meredith and Oxley 2015, 209</a>)</span>.</p>
-<p>Inputing the raw data into an Excel spreadsheet results in <a href="#fig-excel" class="quarto-xref">Figure&nbsp;2</a> below. Each column, known as <strong>field</strong> or <strong>variable</strong> presents a piece of information. As well as the case number (<em>casen</em>) and the date of admission (information that is split in two fields: <em>month</em> and <em>year</em>), the source records several pieces of information about these inmates, such <em>name</em> and <em>surname</em>, <em>sex</em>, <em>age</em>, place of birth (<em>born</em>) and country of birth (<em>countryb</em>), the place where the were living before being imprisoned (<em>reside</em>), height (in <em>feet</em> and <em>inches</em>) and <em>weight</em>, occupation (<em>occup</em>) and whether they were <em>employed</em> or not. It also reports their <em>literacy</em>, the <em>marks</em> that were visible in their bodies, the <em>offence</em> they committed and the <em>sentence</em> they received. While the first row displays the name of these variables, the remaining rows are devoted to each individual in the dataset.</p>
-<div id="fig-excel" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
+<p>Inputing the raw data into an Excel spreadsheet results in <a href="#fig-excel" class="quarto-xref">Figure&nbsp;3</a> below. Each column, known as <strong>field</strong> or <strong>variable</strong> presents a piece of information. As well as the case number (<em>casen</em>) and the date of admission (information that is split in two fields: <em>month</em> and <em>year</em>), the source records several pieces of information about these inmates, such <em>name</em> and <em>surname</em>, <em>sex</em>, <em>age</em>, place of birth (<em>born</em>) and country of birth (<em>countryb</em>), the place where the were living before being imprisoned (<em>reside</em>), height (in <em>feet</em> and <em>inches</em>) and <em>weight</em>, occupation (<em>occup</em>) and whether they were <em>employed</em> or not. It also reports their <em>literacy</em>, the <em>marks</em> that were visible in their bodies, the <em>offence</em> they committed and the <em>sentence</em> they received. While the first row displays the name of these variables, the remaining rows are devoted to each individual in the dataset.</p>
+<div id="fig-excel" class="quarto-layout-panel page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-excel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/paisley-excel.png" class="quarto-figure quarto-figure-center figure-img" style="width:100.0%;height:100.0%">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
+<img src="images/paisley-excel.png" style="width:100.0%;height:100.0%" class="figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-excel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig quarto-uncaptioned margin-caption" id="fig-excel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3
 </figcaption>
 </figure>
 </div>
-<p>Who were these prisoners? Where they were coming from? Did prisoners’ occupations differ significantly from the rest of the population? What about literacy rates? Did men and women commit different crimes? Did judges treat everyone equally or did particular groups suffer harsher sentences? What explains the variation in stature and weights observed across prisoners? How did theses dimensions change during the period? The range of historical questions that this source can address is almost endless. Sarah Horrell, David Meredith and Deborah Oxley have relied on this information to significantly contribute to our understanding of 19th-century British society, especially regarding the biological living standards of the working classes and the gender dynamics that drove the allocation of resources within these families [<span class="citation" data-cites="horrell2013">Horrell and Oxley (<a href="#ref-horrell2013" role="doc-biblioref">2013</a>)</span>; <span class="citation" data-cites="meredith2015">Meredith and Oxley (<a href="#ref-meredith2015" role="doc-biblioref">2015</a>)</span>).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> We strongly encourage reading those pieces to get to know more about the source and its possibilities. Bear in mind that, for practical reasons, we will rely on a subset of the full data set, containing a thousand prisoners.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Who were these prisoners? Where they were coming from? Did prisoners’ occupations differ significantly from the rest of the population? What about literacy rates? Did men and women commit different crimes? Did judges treat everyone equally or did particular groups suffer harsher sentences? What explains the variation in stature and weights observed across prisoners? How did theses dimensions change during the period? The range of historical questions that this source can address is almost endless. Sarah Horrell, David Meredith and Deborah Oxley have relied on this information to significantly contribute to our understanding of 19th-century British society, especially regarding the biological living standards of the working classes and the gender dynamics that drove the allocation of resources within these families [<span class="citation" data-cites="horrell2013">Horrell and Oxley (<a href="#ref-horrell2013" role="doc-biblioref">2013</a>)</span>; <span class="citation" data-cites="meredith2015">Meredith and Oxley (<a href="#ref-meredith2015" role="doc-biblioref">2015</a>)</span>).<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> We strongly encourage reading those pieces to get to know more about the source and its possibilities. Bear in mind that, for practical reasons, we will rely on a subset of the full data set, containing a thousand prisoners.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
 <p>This type of source allows exploring many historical questions:</p>
 <ul>
 <li><p>How did the biological living standard of living change during the period?</p></li>
@@ -270,8 +292,9 @@ Meredith, David, and Deborah Oxley. 2015. <span>“Blood and Bone: <span>Body</s
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>In a seminal paper, Sarah Horrell and Deborah Oxley had previously addressed these issues using similar registers from the Wandsworth prison, near London <span class="citation" data-cites="horrell2009">(<a href="#ref-horrell2009" role="doc-biblioref">Horrell, Meredith, and Oxley 2009</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>We are extremely grateful to Deborah Oxley and Hamish Maxwell-Stewart for kindly sharing the Paisley dataset.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>I am extremely thankful to Deborah Oxley and Hamish Maxwell-Stewart for kindly sharing this material. I am especially indebted to Deb whose course materials I inherited when I first started teaching a similar course at the University of Oxford in 2011.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>In a seminal paper, Sarah Horrell and Deborah Oxley had previously addressed these issues using similar registers from the Wandsworth prison, near London <span class="citation" data-cites="horrell2009">(<a href="#ref-horrell2009" role="doc-biblioref">Horrell, Meredith, and Oxley 2009</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>We are extremely grateful to Deborah Oxley and Hamish Maxwell-Stewart for kindly sharing the Paisley dataset.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
