@@ -12,7 +12,6 @@ For an illustration on how this type of source looks like, see the register incl
 Admission register, H.M. Prison Wandsworth (June 14, 1873).
 :::
 
-
 The previous picture comes from the [H.M. Prison Wandsworth](https://discovery.nationalarchives.gov.uk/details/r/d0cbdc1e-f297-4488-9acf-1da291f28f76), near London. The Paisley records are not as fancy. @fig-source below shows a sample of the original source. While each column records different pieces of information (case number, date of admission, name, etc.), each row refers to each inmate in the data set. The data set was originally collected by Hamish Maxwell-Stewart, James Bradley and Tamsin O'Connor who systematically sample every fourth double page of all registers, resulting in a total of 13,879 observations. For practical reasons, we will rely on a subset of the full data set, containing a thousand prisoners.^[I am extremely thankful to Deborah Oxley and Hamish Maxwell-Stewart for kindly sharing this material. I am especially indebted to Deb whose course materials I inherited when I first started teaching a similar course at the University of Oxford in 2011.] This source presents information in a very structured form, that can be easily transferred to a digital version.
 
 ::: {#fig-source layout-ncol="2"}
