@@ -39,4 +39,5 @@ format:
     css: styles.css
     toc: true
     fig-cap-location: margin
+    fig-align: center
     linkcolor: $blue
