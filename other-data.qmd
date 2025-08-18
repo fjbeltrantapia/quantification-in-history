@@ -1,0 +1,57 @@
+---
+title: "Other historical datasets"
+---
+
+Below you can find a curated set of varied historical datasets that you can use for the class assignment and your own research projects. Please make sure to read the original article describing the information. Digitising historical sources constitutes a huge effort, so we should especially thanks (and properly acknowledge) those authors who make their datasets public. Feel free to contact me if you want to use one of these sources for your project.  
+
+## International data
+
+- [Hansard dataset](https://hansard.parliament.uk/about): UK Parliamentary speeches between 1806 and 1911 (over 1 million parliamentary speeches). This is a huge dataset that might be computationally too demanding on some machines. Find <a href="data/other-data/hansard_sample.csv" download>here</a> a random sample of 10,000 speeches. See @blaxill2020 and @guldi2023 for illustrations using this information.
+
+- Population censuses. [IPUMS International](https://international.ipums.org/international/) holds individual-level information from a variety of historical population censuses [@ruggles2025]. The same or even more extended datasets can be requested to the respective national agencies). 
+
+- Civil and parish registers. [The European Historical Samples Network](https://ehps-net.eu) provides micro-data on individuals (families and households) taken from birth (and baptisms), marriage and death records (and the like). This information allows following individuals through their life courses and study topics such as fertility, mortality, age at marriage and partner choice, social mobility and migration, among others. See @alter2014 and @quaranta2021.
+
+- [The Proceedings of the Old Bailey](https://www.oldbaileyonline.org) [@hitchcock2023]. This dataset contains the texts of 197,752 trials held at London's central criminal court (*The Old Bailey*) between 1674 and 1913. As well as the texts themselves, the data has been labeled, so it allows identifying defendants, offences, victims, verdicts and sentences. See, for instance, @hitchcock2016 for an application.
+
+- [VOC Dataset](https://zenodo.org/records/10599528) [@petram2024]: This dataset stores the pay ledgers of the Dutch East India Company’s (VOC), primarily from the eighteenth century. It contains almost 800,000 records containing each crew member’s name, place of origin, rank, wage, etc. The raw information has been carefully curated and stored in several .csv files that can be merged together using the corresponding IDs. Read more about this source [here](https://openhumanitiesdata.metajnl.com/articles/10.5334/johd.210).
+
+- [Tudor Network of Power](https://github.com/tudor-networks-of-power/code/tree/main/TNP_DATA) [@tnp2023]. This data contains all (surviving) items of correspondence in the Tudor State Papers (1509-1603), which are the official government records of the Tudor period in England. As explained by the authors [@ahnert-etal2023], data cleaning and curation constituted a significant effort. As well as more traditional quantitative methods, this data set is suited for the network analysis.
+
+- [Homicide in Chicago, 1870-1930](https://homicide.northwestern.edu). This dataset consists on 11,0000 homicide reports filed by Chicago Police Department during the period of study, thus allowing the study of homicide, crime, urban development, and the police themselves. See @bienen2003 (available [here](https://homicide.northwestern.edu/docs_fk/homicide/LawJournal/JCLC01.pdf)) for a description of the project and the dataset.
+
+- [African Names Dataset](https://www.slavevoyages.org) [@altis2021]. This dataset contains information on 91,491 Africans taken from captured slave ships or from African slave trading sites after 1807 as a result of the British navy's attempt to suppress the slave trade. It includes names, stature, sex, age, country of origin, the vessel involved, year of arrival, and ports of embarkation and disembarkation.
+
+- [Tatoos dataset](https://www.digitalpanopticon.org/Tattoos,_1793-1925) [@dp]: Almost 60,000 British convict records from 1793 to 1925. As well as other personal information (age, gender, occupation, religion), these records contain physical descriptions of convict bodies, including their tattoos and other marks (i.e. scars). See additional info [here](https://orda.shef.ac.uk/articles/dataset/Tattoos_in_the_Digital_Panopticon_Database_1793-1925/13398665) and @alker2022. 
+
+- [London Lives](https://www.londonlives.org) [@ll]: 240,000 manuscripts from a wide range of primary sources between 1690 and 1800 that allow studying the ordinary life of Londoners (crime, poverty, illness, apprenticeship, work, politics, etc.). See also @hitchcock2020 (available [here](https://www.londonlives.org/book/)).
+
+- [Petitioning in Early Modern England](https://petitioning.history.ac.uk) [@waddell2022]. This dataset consists of 2,847 petitions filed in England between 1573 and 1799. As well as the text itself, it includes information on date, petitioners, topic, administrative responses, etc. Petitions were a crucial mode of communication between the ‘rulers’ and the ‘ruled’, so they provide a vital source for illuminating the concerns of the people, from noblemen to paupers. The data is hosted in this [repository](https://zenodo.org/records/7027693).
+
+- [The Google Books Project](https://www.google.com/intl/en/googlebooks/about/index.html) has digitised millions of books published from the late 17th century onwards (coverage is uneven) and the [Google Books Ngram Viewer](https://books.google.com/ngrams/) allows counting the number of times that a particular term or terms appear in the corpus [@michel2011]. The R package [ngramr](https://github.com/seancarmody/ngramr) mimics the functionalities of  the latter but directly from within the R environment. It extracts data from the Google corpus and provides it in the form of an R dataframe, which can subsequently be treated with the tools you are familiar with. This corpus should be though used with caution. See @pechenick2015 and @schmidt2021 for its biases and limitations to study socio-cultural and linguistic evolution. 
+
+- [The HathiTrust Library](https://www.hathitrust.org) also contains millions of digitised texts and an online tool for single word queries ([bookworm](https://bookworm.htrc.illinois.edu/develop/)). The underlying data can be downloaded by request. The [hathiTools](https://xmarquez.github.io/hathiTools/) R package [@marquez2022] allows to interact directly with these resources. 
+
+## Norwegian data
+
+The [National Biblioteket](https://www.nb.no/search) has million of digitised resources (books, manuscripts, newspapers, letters, etc.). As well as hosting an online [norsk n-gram](https://www.nb.no/ngram/#1_1_1__1_1_3_1810%2C2022_2_2_2_12_2) for quering the corpus, the [DH-LAB](https://www.nb.no/dh-lab/digital-tekstanalyse/) is also creating its own tools for accessing and analysing their collections (including R packages). In any case, if you are interested in a particular period, you can directly contact them and request a particular set of texts. 
+
+Statistics Norway has a collection of [historical statistics](https://www.ssb.no/historisk-statistikk/emner/oversikter) on population, health, education, income, prices, manufacturing, transportation and communication and the environment, among many other dimensions. They usually refer to governmental reports scanned in pdf form. It is often the case that these sources have also been properly digitised.
+
+The [Kommunedatabasen](https://kommunedatabasen.sikt.no) also has digitised a huge amount of historical information on municipalities (kommuner). 
+
+The [HistLab](https://rhd.uit.no/indexeng.html), hosted at the University of Tromsø, stores individual-level information extracted from population censuses (1801-1920), parish registers (baptisms, marriages and deaths) or land registers (1838, 1886). Contact them directly to request the digitised records.
+
+Other additional sources can be found below:
+
+- The Norwegian Parliamentary Debates Dataset [@fiva2025]. This dataset includes all speeches delivered in the Norwegian Parliament between December 1945 and June 2024 (almost one million speeches). As well as the text itself, it includes information on date, speaker, political and regional affiliation, etc.). Given the size of this dataset, we include  <a href="data/other-data/norway/NPD_5pc_sample.csv" download>here</a> a 5 per cent random sample. You can find the whole dataset [here](https://www.jon.fiva.no/data.htm). 
+
+- Norwegian parliamentary elections from 1906 to 2013: candidate-level observations for all candidates from all parties since the 1906 election (2024 version; [@fiva2017]): [here](data/other-data/norway/FivaSmith2024.dta) in .dta format (requires `read_dta()` from the package `haven`). 
+
+## Miscellaneous
+
+Those students with other research interests can choose their dataset on their own. The possibilities are endless. Here are just a few examples:
+
+- [Friends Dataset](https://cran.r-project.org/web/packages/friends/index.html) [@hvitfeldt2020]. The complete transcripts from the famous TV show (1994-2004). This dataset is available by installing and loading the R package `friends`. Although the object itself is not visible in the environment, the object “friends” is implicitly in your environment, so you will have access to it just by typing "friends". You could in any case create an object with the data yourself (`data <- friends`). The dataset does not have a explicit "time" variable but you could easily create your own using the information on "season" (and perhaps "episode"). More info [here](https://cran.r-project.org/web/packages/friends/refman/friends.html) or [here](https://github.com/EmilHvitfeldt/friends).
+
+As mentioned above, I encourage you to find your own dataset.
