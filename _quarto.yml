@@ -13,9 +13,6 @@ website:
     - text: "Instructions"
       icon: fa-list-ul
       href: instructions.qmd
-    - text: "Reading List"
-      icon: fa-list-ul
-      href: readings.qmd
     - text: "Intro to R"
       icon: fa-book
       href: get-r.qmd      
@@ -34,8 +31,31 @@ website:
       - text: "Script"
         href: speeches.qmd   
     - text: "Other sources"
-      href: other-data.qmd   
-      
+      href: other-data.qmd 
+    - text: "Reading List"
+      href: readings.qmd    
+  sidebar:
+    title: "Contents"
+    style: "docked"
+    contents:
+      - text: "Overview"
+        file: index.qmd
+      - text: "Instructions"
+        file: instructions.qmd
+      - text: "Intro to R"
+        file: get-r.qmd
+      - section: "Case-study 1: Paisley Prisoners."
+        contents: 
+          - text: "Background"
+            file: backg-paisley.qmd
+          - text: "Script"
+            file: paisley.qmd      
+      - section: "Case-study 2: State of the Union Speeches."
+        contents: 
+          - text: "Background"
+            file: backg-speeches.qmd
+          - text: "Script"
+            file: speeches.qmd            
 bibliography: refs.bib
 
 format:
