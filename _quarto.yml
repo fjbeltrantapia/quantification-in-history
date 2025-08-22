@@ -10,6 +10,9 @@ website:
     - text: "Overview"
       icon: fa-home
       href: index.qmd
+    - text: "Instructions"
+      icon: fa-list-ul
+      href: instructions.qmd
     - text: "Reading List"
       icon: fa-list-ul
       href: readings.qmd

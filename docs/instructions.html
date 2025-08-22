@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Case-study 2: The State of the Union Presidential Speeches – Quantification in History - HIST1505/HIST1515</title>
+<title>instructions – Quantification in History - HIST1505/HIST1515</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -94,7 +94,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Overview</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./instructions.html"> <i class="bi bi-fa-list-ul" role="img">
+    <a class="nav-link active" href="./instructions.html" aria-current="page"> <i class="bi bi-fa-list-ul" role="img">
 </i> 
 <span class="menu-text">Instructions</span></a>
   </li>  
@@ -157,62 +157,44 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Case-study 2: The State of the Union Presidential Speeches</h1>
-</div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>The second case-study involves exploring the <strong>State of the Union Addresses</strong> that the president of the United States delivers annually since 1790. Each of these speeches seeks to set the political agenda.</p>
-<p>As an illustration, please read the text included in the link below that records the address that Woodrow Wilson gave in December of 1913:</p>
-<p><a href="https://www.presidency.ucsb.edu/documents/first-annual-message-18">State of the Union Presidential Address - Woodrow Wilson - December 2, 1913</a></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/wilson.jpg" class="quarto-figure quarto-figure-center figure-img" style="width:100.0%;height:100.0%"></p>
-</figure>
-</div>
-<p>The full corpus contains 235 texts (speeches; with a total of almost 1.7 million words) and constitutes an important source of information about the US political agenda and the wider socio-economic and cultural context surrounding them. This information has been gathered together into a .csv file that looks like <a href="#fig-csv" class="quarto-xref">Figure&nbsp;1</a> below. Instead of columns, comma-separate (.csv) files separate the different pieces of information using commas as delimiters: name of the president delivering the speech (<em>President</em>), the year the speech was delivered (<em>Year</em>), the title of the speech (<em>Title</em>) and the (whole) text of the speech itself (<em>Text</em>).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The first row displays the name of these variables and the remaining rows are devoted to each observation (speech) in the dataset.</p>
-<div id="fig-csv" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure page-columns page-full">
-<div aria-describedby="fig-csv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/speeches-csv.png" class="quarto-figure quarto-figure-center figure-img" style="width:100.0%;height:100.0%">
-</div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig quarto-uncaptioned margin-caption" id="fig-csv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1
-</figcaption>
-</figure>
-</div>
-<p>Computational text analysis can provide important insights about the contents of these speeches, including how they have changed over time or how they differ between Democrat and Republican presidents. What kind of words are used more often: “war” or “peace”, “justice” or “freedom”? Is education an important topic in these speeches? What about the economy (“business”, “debt”, “dollar”)? Which locations (including countries) are mentioned more often? Are women present in these speeches? What is the context in which these terms appear?</p>
-<p>In this case-study, we will explore very simple tools that allow counting the number of particular words appearing in those speeches. For those eager to learning more after our session, you can read more about applying computational methods to this corpus <a href="https://www.theatlantic.com/politics/archive/2015/01/mapping-the-state-of-the-union/384576/">here</a>, <a href="https://ischoolonline.berkeley.edu/blog/trump-state-of-the-union-analysis/">here</a>, <a href="https://dl.acm.org/doi/pdf/10.1145/3603287.3651201">here</a>, <a href="https://www.rpubs.com/Przemyslaw_Mazurek/state_of_the_union">here</a> or <a href="https://cran.r-project.org/web/packages/cleanNLP/vignettes/state-of-union.html">here</a>.</p>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<p>Please follow the instructions below to prepare the session in advance:</p>
+<p><strong>1. Install R and RStudio</strong>. <strong>R</strong> is a (free) statistical software and <strong>RStudio</strong> is an integrated interface that makes working with R easier. Bear in mind that you have to download and install both softwares: R and RStudio. The version you install depends on whether you are using Windows or Mac. Here is a <a href="https://posit.co/download/rstudio-desktop/">link</a> to access them.</p>
+<p><strong>2. Create a dedicated folder to this session in your computer.</strong> Name it <code>quants</code>.</p>
+<p><strong>3. Download the following materials</strong>. Store these files in separate folders (named <code>data</code> and <code>scripts</code>, respectively) within the folder <code>quants</code>:</p>
+<ul>
+<li><p>The <u>datasets</u> we will be working with: <a href="data/paisley-data.xlsx">here</a> and <a href="data/state-of-the-union-texts.csv" download="">here</a>.</p></li>
+<li><p>The <u>R scripts</u> containing the code to extract (some) information from them: <a href="paisley.R" download="">here</a> and <a href="speeches.R" download="">here</a>.</p></li>
+</ul>
+<p><strong>4. Get familiar with R and RStudio</strong> by opening <strong>RStudio</strong> and following the instructions in the <a href="get-r.html">Intro to R</a> section.</p>
+<p><strong>5. Read the following texts in advance:</strong></p>
+<ul>
+<li><p>The background information for the two <u>case-studies</u> we will be exploring: <a href="backg-paisley.html">The Paisley Prisoners’ Dataset</a> and <a href="backg-speeches.html">The State of the Union Presidential Speeches</a>.</p></li>
+<li><p>The text <u>Quantifying history</u> (available in Blackboard).</p></li>
+</ul>
+<p><strong>6. Do not forget to bring your laptop to the session (or work in pairs)</strong></p>
+<p>Do not hesitate to contact me if you have any question!</p>
 
-<ol>
-<li id="fn1"><p>An extended dataset including party affiliation is available here: https://www.kaggle.com/datasets/rtatman/state-of-the-union-corpus-1989-2017<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
