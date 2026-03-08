@@ -199,7 +199,7 @@ data |>
     geom_line()
 ```
 
-We could obviously refine our analysis to take into account other dimensions of our data. Using `filter()`, for instance, would allow to focus on particular subsamples of our data (i.e. males or females) or exclude outliers, that is, observations with extreme values that may distort our results (i.e. very old prisoners; see chapter X for a more detailed discussion of **outliers**). We can also go beyond the previous graph and simultaneously consider other dimensions in the visualisation itself. The code below replicates the previous plot but distinguishing by sex and excluding the prisoner who are really old (80+). This exercise not only makes clear that women are in general lighter, but also that they seem to lose weight more rapidly than men: the slope of the line tracking the relationship between age and weight is steeper.
+We could obviously refine our analysis to take into account other dimensions of our data. Using `filter()`, for instance, would allow to focus on particular subsamples of our data (i.e. males or females) or exclude outliers, that is, observations with extreme values that may distort our results (i.e. very old prisoners; see chapter X for a more detailed discussion of **outliers**). We can also go beyond the previous graph and simultaneously consider other dimensions in the visualisation itself. The code below replicates the previous plot but distinguishing by sex and excluding the prisoner who are really old (80+). This exercise not only makes clear that women are in general lighter, but also that they seem to lose weight more rapidly than men: the slope of the line tracking the relationship between age and weight is steeper (the function `geom_smooth()` helps tracing the underlying link between these two variables by "smoothing" the ups and downs).
 
 ```{r}
 #| warning: false
@@ -210,7 +210,8 @@ data |>
   summarise(mean_weight = mean(weight_kg, na.rm = TRUE)) |>
   ggplot(aes(x = age, y = mean_weight, color = sex)) +
     geom_point() +
-    geom_line()
+    geom_line() +
+    geom_smooth()
 ```
 
 We don't have time for more. This is though just the very tip of the iceberg. Quantitative tools allow extracting information from historical sources in a powerful way, regardless whether the information is numerical or qualitative.

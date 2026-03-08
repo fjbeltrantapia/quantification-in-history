@@ -148,7 +148,7 @@ data_token <- speeches |>
 As evident below, this tool transform the original corpus into a new dataframe when each row refers to each token, while preserving the metadata associated to them (speech, president, year, etc.). In total, we have almost 1.8 million tokens in this corpus.
 
 ```{r}
-data_token
+data_token |> select(President, Year, words)
 ```
 
 Once the data is expressed in this way, the column *words* contain all tokens mentioned in the speeches. These categories are basically qualitative information and can therefore be treated with the same tools we learned in the previous session. For instance, we can simply `count()` the number of times each category (token) is mentioned. Sorting the results by those with the highest frequencies (`sort = TRUE`) immediately indicates which tokens are the most common.
@@ -171,7 +171,7 @@ The trick now is to take this list of stop words and use it to exclude those ter
 ```{r}
 data_token <- data_token |>
   anti_join(stop_words, by = c("words" = "word"))
-data_token
+data_token |> select(Year, President, words)
 ```
 
 The resulting object no longer contains those stop words. We can now proceed counting these categories again. The most common terms are now much more informative. 
@@ -216,33 +216,41 @@ data_token |>
   geom_col(aes(x = Year, y = fr_war))
 ```
 
-Likewise, instead of splitting the corpus into 1-gram tokens, tokenising may involve creating multiple-word tokens: 2-grams, 3-grams, etc. As above, the code below uses `unnest_tokens()` again but it now indicates that we want 2-gram tokens (`n = 2`). The output shows how the corpus has not been split into.
+## Key-words in context
+
+Likewise, instead of splitting the corpus into 1-gram tokens, tokenising may involve creating multiple-word tokens: 2-grams, 3-grams, etc. As above, the code below uses `unnest_tokens()` again but it now indicates that we want 5-gram tokens (`n = 5`). The output shows how the corpus has been split into 5-token grams.
 
 ```{r}
 data_token2 <- speeches |>
-  unnest_tokens(twogram, Text, token = "ngrams", n = 2)
-data_token2
+  unnest_tokens(window, Text, token = "ngrams", n = 5)
+data_token2 |> select(President, Year, window)
 ```
 
-This type of multiple-word tokens are very useful to identify the terms that are mentioned accompanying particular words. Imagine, for instance, that we are not only interested in how many times the word "women" is mentioned, but also in which context. The code below implements such analysis.
+As well as to learn more about the general context in which these terms appear, this type of multiple-word tokens are very useful to identify the terms that are mentioned accompanying particular words. Imagine, for instance, that we are not only interested in how many times the word "women" is mentioned, but also in which context. The code below implements such analysis (we could have expanded the "window" to more terms if we wished).
 
 ```{r}
 women <- data_token2 |> 
-  separate_wider_delim(cols = twogram, delim = " ", 
-                       names = c("g1", "g2")) |>
-  filter(g1 == "women" | g2 == "women") |>
-  pivot_longer(g1:g2) |>
-  select(!name) |>
+  separate_wider_delim(cols = window, delim = " ", 
+                       names = c("g1", "g2", "g3", "g4", "g5")) |>
+  filter(g3=="women") |>
+  select(-g3) |>
+  pivot_longer(cols = c("g1", "g2", "g4", "g5"),
+               names_to = "order") |>
   rename(words = value) |>
-  filter(words!="women") |>
   anti_join(stop_words, by = c("words" = "word")) 
-women
+women |> select(President, Year, order, words)
 ```
+
+Identifying which terms are most commonly mentioned around women in the straightforward. Here, we take into account all of them, regardless where the were mentioned but we could use the info on the column *order* to qualify this analysis.
 
 ```{r}
 women |> 
   count(words, sort=TRUE)
 ```
+
+Many of the words mentioned around women refer to their role as mothers: "children", "pregnant", "infant", etc. We can also identify words related to employment and to minorities: "chinese", "indian" and the term "minorities" itself. 
+
+An additional exercise could involve tracing the temporal evolution in which these categories emerge. Here we just simply identify the years in which the term "pregnant" shows up. This seem to be an issue that pertains especially the 1980s and 1990s and this would push you to read more about those speeches and what was the particular context behind.
 
 ```{r}
 women |> 
@@ -250,5 +258,9 @@ women |>
   count(Year)
 ```
 
-We are going to stop here. We don't have time for more but there is so much more. I hope this session has given you a sense of how computational methods allow extracting information from historical sources in a powerful way, regardless whether the information is qualitative, numerical or purely textual. For those who want to know more, see you in [HIST2025 Computational History](https://www.ntnu.edu/studies/courses/HIST2025#tab=omEmnet).
+We are going to stop here. The analysis above is very rudimentary and suffers from many issues but we don't have time for more. There is in any case so much more that we could do. I should also stress that these methods are a complement (not a substitute) to close reading, source criticism and deep contextual knowledge.
+
+----
+
+I hope these two sessions have given you a sense of how computational methods allow extracting information from historical sources in a powerful way, regardless whether the information is qualitative, numerical or purely textual. For those who want to know more, see you in [HIST2025 Computational History](https://www.ntnu.edu/studies/courses/HIST2025#tab=omEmnet).
 
