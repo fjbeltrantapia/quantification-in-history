@@ -1,6 +1,6 @@
 ## Session: Quantification in History
 
-September 2, 2025 -- 14:15-18:00 -- Room U302 ([Akrinn](https://maps.app.goo.gl/neGSMmi15nzrfNyr5), Kalvskinnet)
+<!--March 16, 2026 -- 14:15-18:00 -- Room U302 ([Akrinn](https://maps.app.goo.gl/neGSMmi15nzrfNyr5), Kalvskinnet)-->
 
 Instructor: [Francisco J. Beltrán Tapia](https://fjbeltrantapia.github.io)
 
@@ -8,4 +8,8 @@ Instructor: [Francisco J. Beltrán Tapia](https://fjbeltrantapia.github.io)
 
 Welcome to quantitative methods in history! As part of the course **Introduction to historical theory and methods** (HIST1505/HIST1515), this session provides a practical introduction on how historians can use computational tools to learn about the past.
 
+::: {.callout-important}
+### Important warning
 Please follow the [instructions](instructions.html) to prepare the session in advance. 
+
+:::
