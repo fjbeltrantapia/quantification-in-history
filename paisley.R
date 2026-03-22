@@ -5,7 +5,7 @@ rm(list=ls())
 setwd("~/Documents/quants") 
 
 # Install/load packages
-install.packages("tidyverse")
+# install.packages("tidyverse")
 library(tidyverse)
 library(readxl)
 
@@ -25,14 +25,16 @@ view(data)
 
 # Frequency table
 data |>  
-  count(sex) 
+  count(countryb) 
+
+count(data, sex)
 
 data |>  
   count(employed)
 
 data |>  
   count(occup) |>
-  print(n = 15)
+  print(n = 100)
 
 data |>  
   count(occup, sort = TRUE)
@@ -44,7 +46,13 @@ data |>
 
 data |>  
   count(occup, sort = TRUE) |>              
-  mutate(prop = n/sum(n)) 
+  mutate(perc = 100*n/sum(n)) 
+
+data |>
+  filter(sex=="female") |>
+  count(occup, sort = TRUE) |>              
+  mutate(perc = 100*n/sum(n)) 
+
 
 data |> 
   filter(sex=="female") |>   # narrow down the analysis
@@ -68,6 +76,7 @@ data |>
   summarize(mean_age = mean(age, na.rm = TRUE))
 
 data |> 
+  group_by(sex) |>
   summarize(
     obs = sum(!is.na(age)),
     mean = mean(age, na.rm = TRUE), 
@@ -102,4 +111,30 @@ data |>
   summarise(mean_weight = mean(weight_kg, na.rm = TRUE)) |> 
   ggplot(aes(x = age, y = mean_weight, color = sex)) +
     geom_point() +
-    geom_line()
+    geom_line() + geom_smooth()
+
+
+# Uncertainty
+
+data |>
+  filter(sex=="male" & age>=20 & countryb!="") |>
+  group_by(countryb) |>
+  summarise(
+    obs = sum(!is.na(weight_kg)), 
+    mean = mean(weight_kg, na.rm = TRUE))
+
+data |>
+  filter(sex=="male" & age>=20 & countryb!="") |>
+  group_by(countryb) |>
+  summarise(
+    obs = sum(!is.na(weight_kg)), 
+    mean = mean(weight_kg, na.rm = TRUE),
+    sd = sd(weight_kg, na.rm=TRUE),
+    st.dev = sd(weight_kg, na.rm=TRUE),
+    st.error = sd/sqrt(obs), 
+    lb_ci = t.test(weight_kg, conf.level = 0.95)$conf.int[1],      # CI lower bound
+    ub_ci = t.test(weight_kg, conf.level = 0.95)$conf.int[2])) |>  # CI upper bound
+  mutate_if(is.numeric, round, 1) |>
+  ggplot(aes(x = countryb, y = mean)) +
+  geom_point() +
+  geom_errorbar(aes(x = countryb, ymin = lb_ci, ymax = ub_ci), width = 0.1)

@@ -226,19 +226,27 @@ data_token2 <- speeches |>
 data_token2 |> select(President, Year, window)
 ```
 
-As well as to learn more about the general context in which these terms appear, this type of multiple-word tokens are very useful to identify the terms that are mentioned accompanying particular words. Imagine, for instance, that we are not only interested in how many times the word "women" is mentioned, but also in which context. The code below implements such analysis (we could have expanded the "window" to more terms if we wished).
+We can now focus only on those ngrams (windows) mentioning particular terms. Imagine, for instance, that we are not only interested in how many times the word "women" (or "woman") is mentioned, but also in which context. The code below implements such analysis (we could have expanded the "window" to more terms if we wished). 
 
 ```{r}
 women <- data_token2 |> 
   separate_wider_delim(cols = window, delim = " ", 
                        names = c("g1", "g2", "g3", "g4", "g5")) |>
-  filter(g3=="women") |>
+  filter(g3=="women" | g3=="woman") |> 
+  select(President, Year, g1, g2, g3, g4, g5)
+women
+```
+
+As well as to learn more about the general context in which these terms appear, this type of multiple-word tokens are very useful to identify the most common (or rare) terms that are mentioned accompanying particular words. The code below builds on the previous object, puts all the accommpanying words in the same column (but keeping the information about their position) and removes stop words.
+
+```{r}
+women <- women |>
   select(-g3) |>
   pivot_longer(cols = c("g1", "g2", "g4", "g5"),
                names_to = "order") |>
   rename(words = value) |>
   anti_join(stop_words, by = c("words" = "word")) 
-women |> select(President, Year, order, words)
+women
 ```
 
 Identifying which terms are most commonly mentioned around women in the straightforward. Here, we take into account all of them, regardless where the were mentioned but we could use the info on the column *order* to qualify this analysis.
@@ -248,7 +256,7 @@ women |>
   count(words, sort=TRUE)
 ```
 
-Many of the words mentioned around women refer to their role as mothers: "children", "pregnant", "infant", etc. We can also identify words related to employment and to minorities: "chinese", "indian" and the term "minorities" itself. 
+Many of the words mentioned around women refer to their role as mothers "children", "pregnant", "infant", etc. (although this also arises from referring to "women and children" as a group). As well as to the nation itself ("america", "american"), we can also identify words related to employment and to minorities: "chinese", "indian" and the term "minorities" itself. 
 
 An additional exercise could involve tracing the temporal evolution in which these categories emerge. Here we just simply identify the years in which the term "pregnant" shows up. This seem to be an issue that pertains especially the 1980s and 1990s and this would push you to read more about those speeches and what was the particular context behind.
 

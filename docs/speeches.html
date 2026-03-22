@@ -721,20 +721,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 # ℹ 1,765,550 more rows</code></pre>
 </div>
 </div>
-<p>As well as to learn more about the general context in which these terms appear, this type of multiple-word tokens are very useful to identify the terms that are mentioned accompanying particular words. Imagine, for instance, that we are not only interested in how many times the word “women” is mentioned, but also in which context. The code below implements such analysis (we could have expanded the “window” to more terms if we wished).</p>
+<p>We can now focus only on those ngrams (windows) mentioning particular terms. Imagine, for instance, that we are not only interested in how many times the word “women” (or “woman”) is mentioned, but also in which context. The code below implements such analysis (we could have expanded the “window” to more terms if we wished).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>women <span class="ot">&lt;-</span> data_token2 <span class="sc">|&gt;</span> </span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_wider_delim</span>(<span class="at">cols =</span> window, <span class="at">delim =</span> <span class="st">" "</span>, </span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"g1"</span>, <span class="st">"g2"</span>, <span class="st">"g3"</span>, <span class="st">"g4"</span>, <span class="st">"g5"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(g3<span class="sc">==</span><span class="st">"women"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>g3) <span class="sc">|&gt;</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"g1"</span>, <span class="st">"g2"</span>, <span class="st">"g4"</span>, <span class="st">"g5"</span>),</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"order"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">words =</span> value) <span class="sc">|&gt;</span></span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"words"</span> <span class="ot">=</span> <span class="st">"word"</span>)) </span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>women <span class="sc">|&gt;</span> <span class="fu">select</span>(President, Year, order, words)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(g3<span class="sc">==</span><span class="st">"women"</span> <span class="sc">|</span> g3<span class="sc">==</span><span class="st">"woman"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(President, Year, g1, g2, g3, g4, g5)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>women</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 309 × 4
+<pre><code># A tibble: 344 × 7
+   President          Year g1               g2       g3    g4       g5          
+   &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;       
+ 1 George Washington  1795 of               innocent women and      children    
+ 2 Abraham Lincoln    1862 indiscriminately men      women and      children    
+ 3 Ulysses S. Grant   1871 of               men      women and      children    
+ 4 Ulysses S. Grant   1873 of               american women marrying foreigners  
+ 5 Ulysses S. Grant   1874 to               chinese  women hardly   a           
+ 6 Ulysses S. Grant   1874 of               american women who      have        
+ 7 Ulysses S. Grant   1875 of               american women who      may         
+ 8 Ulysses S. Grant   1875 of               chinese  women but      few         
+ 9 Ulysses S. Grant   1875 importation      of       women for      illegitimate
+10 Ulysses S. Grant   1876 of               american women who      may         
+# ℹ 334 more rows</code></pre>
+</div>
+</div>
+<p>As well as to learn more about the general context in which these terms appear, this type of multiple-word tokens are very useful to identify the most common (or rare) terms that are mentioned accompanying particular words. The code below builds on the previous object, puts all the accommpanying words in the same column (but keeping the information about their position) and removes stop words.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>women <span class="ot">&lt;-</span> women <span class="sc">|&gt;</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>g3) <span class="sc">|&gt;</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"g1"</span>, <span class="st">"g2"</span>, <span class="st">"g4"</span>, <span class="st">"g5"</span>),</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"order"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">words =</span> value) <span class="sc">|&gt;</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"words"</span> <span class="ot">=</span> <span class="st">"word"</span>)) </span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>women</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 365 × 4
    President          Year order words           
    &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;           
  1 George Washington  1795 g2    innocent        
@@ -747,43 +769,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  8 Ulysses S. Grant   1873 g5    foreigners      
  9 Ulysses S. Grant   1874 g2    chinese         
 10 Ulysses S. Grant   1874 g2    american        
-# ℹ 299 more rows</code></pre>
+# ℹ 355 more rows</code></pre>
 </div>
 </div>
 <p>Identifying which terms are most commonly mentioned around women in the straightforward. Here, we take into account all of them, regardless where the were mentioned but we could use the info on the column <em>order</em> to qualify this analysis.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>women <span class="sc">|&gt;</span> </span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(words, <span class="at">sort=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>women <span class="sc">|&gt;</span> </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(words, <span class="at">sort=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 213 × 2
+<pre><code># A tibble: 252 × 2
    words          n
    &lt;chr&gt;      &lt;int&gt;
  1 children      23
- 2 uniform       13
- 3 american       7
- 4 pregnant       7
+ 2 uniform       14
+ 3 american       8
+ 4 pregnant       8
  5 servicemen     6
- 6 employment     4
- 7 industry       4
- 8 infants        4
- 9 law            4
-10 minorities     4
-# ℹ 203 more rows</code></pre>
+ 6 child          5
+ 7 serving        5
+ 8 america        4
+ 9 employment     4
+10 industry       4
+# ℹ 242 more rows</code></pre>
 </div>
 </div>
-<p>Many of the words mentioned around women refer to their role as mothers: “children”, “pregnant”, “infant”, etc. We can also identify words related to employment and to minorities: “chinese”, “indian” and the term “minorities” itself.</p>
+<p>Many of the words mentioned around women refer to their role as mothers “children”, “pregnant”, “infant”, etc. (although this also arises from referring to “women and children” as a group). As well as to the nation itself (“america”, “american”), we can also identify words related to employment and to minorities: “chinese”, “indian” and the term “minorities” itself.</p>
 <p>An additional exercise could involve tracing the temporal evolution in which these categories emerge. Here we just simply identify the years in which the term “pregnant” shows up. This seem to be an issue that pertains especially the 1980s and 1990s and this would push you to read more about those speeches and what was the particular context behind.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>women <span class="sc">|&gt;</span> </span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(words <span class="sc">==</span> <span class="st">"pregnant"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Year)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>women <span class="sc">|&gt;</span> </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(words <span class="sc">==</span> <span class="st">"pregnant"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Year)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 2
+<pre><code># A tibble: 4 × 2
    Year     n
   &lt;dbl&gt; &lt;int&gt;
 1  1981     4
 2  1989     1
-3  1995     2</code></pre>
+3  1995     2
+4  2018     1</code></pre>
 </div>
 </div>
 <p>We are going to stop here. The analysis above is very rudimentary and suffers from many issues but we don’t have time for more. There is in any case so much more that we could do. I should also stress that these methods are a complement (not a substitute) to close reading, source criticism and deep contextual knowledge.</p>

@@ -117,22 +117,28 @@ data_token |>
 # multiple-grams
 
 data_token2 <- speeches |>
-  unnest_tokens(twogram, Text, token = "ngrams", n = 2)
+  unnest_tokens(window, Text, token = "ngrams", n = 5)
 
 data_token2
 
-# words accompanying other words
+# keywords in context
+
 women <- data_token2 |> 
-  separate_wider_delim(cols = twogram, delim = " ", 
-                       names = c("g1", "g2")) |>
-  filter(g1 == "women" | g2 == "women") |>
-  pivot_longer(g1:g2) |>
-  select(!name) |>
+  separate_wider_delim(cols = window, delim = " ", 
+                       names = c("g1", "g2", "g3", "g4", "g5")) |>
+  filter(g3=="women" | g3=="woman") |> 
+  select(President, Year, g1, g2, g3, g4, g5)
+women
+
+# words accompanying other words
+women <- women |>
+  select(-g3) |>
+  pivot_longer(cols = c("g1", "g2", "g4", "g5"),
+               names_to = "order") |>
   rename(words = value) |>
-  filter(words!="women") |>
   anti_join(stop_words, by = c("words" = "word")) 
 
-women
+women 
 
 women |> 
   count(words, sort=TRUE)
